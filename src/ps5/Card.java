@@ -36,6 +36,14 @@ public class Card {
         return cardIntValue;
     }
 
+    public boolean supTo(Card card){
+        return this.getCardIntValue() > card.getCardIntValue();
+    }
+
+    public boolean areValuesEquals(Card card){
+        return this.getCardIntValue() == card.getCardIntValue();
+    }
+
     @Override
     public boolean equals(Object o){
         if (this == o){
