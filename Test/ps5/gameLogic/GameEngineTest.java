@@ -1,7 +1,9 @@
-package ps5;
+package ps5.gameLogic;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ps5.io.HandScanner;
+import ps5.player.Hand;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

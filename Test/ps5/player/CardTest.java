@@ -1,4 +1,4 @@
-package ps5;
+package ps5.player;
 
 import static org.junit.jupiter.api.Assertions.*;
 

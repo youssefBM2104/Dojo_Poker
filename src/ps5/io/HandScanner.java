@@ -1,4 +1,7 @@
-package ps5;
+package ps5.io;
+
+import ps5.player.Card;
+import ps5.player.Hand;
 
 import java.util.Scanner;
 
