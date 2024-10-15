@@ -4,6 +4,8 @@ package ps5;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.List;
+
 public class GameEngine {
     public boolean isBrelan(Hand hand){
         Map<String,Integer> hashmap = new HashMap<>();
@@ -25,7 +27,15 @@ public class GameEngine {
         return false;
 
     }
+
     public boolean isFullColor(Hand hand){
-        return false;
+        List<Card> cardList = hand.getCardList();
+        Card firstCard = cardList.getFirst();
+        for(Card card : cardList){
+            if(!(firstCard.isSameColor(card))){
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -44,6 +44,10 @@ public class Card {
         return this.getCardIntValue() == card.getCardIntValue();
     }
 
+    public boolean isSameColor(Card card){
+        return this.getCardColor().equals(card.getCardColor());
+    }
+
     @Override
     public boolean equals(Object o){
         if (this == o){
