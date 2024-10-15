@@ -18,15 +18,18 @@ class GameEngineTest {
     }
 
     @Test
-    void isFullColor0() {
+    void isFullColor1() {
         handScanner = new HandScanner();
         hand = new Hand();
 
-        hand.addCardToHand(handScanner.getCardFromString("9Tr"));
+        hand.addCardToHand(handScanner.getCardFromString("10Tr"));
         hand.addCardToHand(handScanner.getCardFromString("ACa"));
-        hand.addCardToHand(handScanner.getCardFromString("6Co"));
+        hand.addCardToHand(handScanner.getCardFromString("7Co"));
         hand.addCardToHand(handScanner.getCardFromString("RPi"));
-        hand.addCardToHand(handScanner.getCardFromString("1Co"));
+        hand.addCardToHand(handScanner.getCardFromString("2Co"));
+
+
+
     }
 
     @Test
@@ -56,12 +59,6 @@ class GameEngineTest {
     @Test
     void isFullColor4() {
         handScanner = new HandScanner();
-        gameEngine = new GameEngine();
-    }
-
-
-    @Test
-    void isBrelan() {
         hand = new Hand();
 
         hand.addCardToHand(handScanner.getCardFromString("10Tr"));
