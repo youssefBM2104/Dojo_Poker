@@ -1,4 +1,4 @@
-package ps5.gameLogic;
+package ps5.io;
 
 public class Game {
 }
