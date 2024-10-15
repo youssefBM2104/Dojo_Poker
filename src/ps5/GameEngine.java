@@ -4,4 +4,7 @@ public class GameEngine {
     public boolean isBrelan(Hand hand){
         return false;
     }
+    public boolean isFullColor(Hand hand){
+        return false;
+    }
 }
