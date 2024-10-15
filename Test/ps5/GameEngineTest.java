@@ -12,23 +12,24 @@ class GameEngineTest {
     private GameEngine gameEngine;
 
     @BeforeEach
-    void setup(){
-    @Test
-    void isFullColor1() {
-        handScanner = new HandScanner();
-        hand = new Hand();
-
-        hand.addCardToHand(handScanner.getCardFromString("10Tr"));
-        hand.addCardToHand(handScanner.getCardFromString("ACa"));
-        hand.addCardToHand(handScanner.getCardFromString("7Co"));
-        hand.addCardToHand(handScanner.getCardFromString("RPi"));
-        hand.addCardToHand(handScanner.getCardFromString("2Co"));
-
+    void setup() {
 
 
     }
 
+    @Test
+    void isFullColor0() {
+        handScanner = new HandScanner();
+        hand = new Hand();
 
+        hand.addCardToHand(handScanner.getCardFromString("9Tr"));
+        hand.addCardToHand(handScanner.getCardFromString("ACa"));
+        hand.addCardToHand(handScanner.getCardFromString("6Co"));
+        hand.addCardToHand(handScanner.getCardFromString("RPi"));
+        hand.addCardToHand(handScanner.getCardFromString("1Co"));
+    }
+
+    @Test
     void isFullColor2() {
         handScanner = new HandScanner();
         hand = new Hand();
@@ -40,6 +41,7 @@ class GameEngineTest {
         hand.addCardToHand(handScanner.getCardFromString("2Co"));
     }
 
+    @Test
     void isFullColor3() {
         handScanner = new HandScanner();
         hand = new Hand();
@@ -51,6 +53,7 @@ class GameEngineTest {
         hand.addCardToHand(handScanner.getCardFromString("2Tr"));
     }
 
+    @Test
     void isFullColor4() {
         handScanner = new HandScanner();
         gameEngine = new GameEngine();
