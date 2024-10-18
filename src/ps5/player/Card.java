@@ -24,7 +24,6 @@ public class Card {
         return cardValue;
     }
 
-
     public boolean supTo(Card card){
         return this.cardValue.ordinal() > card.cardValue.ordinal();
     }
