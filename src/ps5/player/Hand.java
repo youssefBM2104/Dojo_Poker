@@ -31,6 +31,7 @@ public class Hand {
     public void addCardToHand(Card card){
         this.cardList.add(card);
     }
+
     public boolean isBrelan(Hand hand){
         Map<CardValue,Integer> hashmap = new HashMap<>();
 
