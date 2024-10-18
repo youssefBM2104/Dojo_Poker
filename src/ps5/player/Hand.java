@@ -31,6 +31,38 @@ public class Hand {
     public void addCardToHand(Card card){
         this.cardList.add(card);
     }
+
+    public CardValue maxCardValue(){
+
+        Card maxCard = cardList.getFirst();
+        for(Card card : cardList) {
+            if(card.supTo(maxCard)){
+                maxCard=card;
+            }
+        }
+        return maxCard.getCardValue();
+    }
+
+    public boolean isPaire(){
+        Map<CardValue,Integer> hashmap = new HashMap<>();
+
+        for (Card card : cardList) {
+            CardValue cardValue = card.getCardValue();
+            hashmap.put(cardValue, hashmap.getOrDefault(cardValue, 0) + 1);
+        }
+
+
+        for (Map.Entry<CardValue, Integer> entry : hashmap.entrySet()) {
+            if (entry.getValue() >= 2) {
+                handPriority = HandPriority.PAIRE;
+                highestCard = entry.getKey();
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public boolean isBrelan(){
         Map<CardValue,Integer> hashmap = new HashMap<>();
 
@@ -41,7 +73,7 @@ public class Hand {
 
 
         for (Map.Entry<CardValue, Integer> entry : hashmap.entrySet()) {
-            if (entry.getValue() == 3) {
+            if (entry.getValue() >= 3) {
                 handPriority = HandPriority.BRELAN;
                 highestCard = entry.getKey();
                 return true;
@@ -62,14 +94,7 @@ public class Hand {
         return true;
     }
 
-    public CardValue maxCardValue(){
 
-        Card maxCard = cardList.getFirst();
-        for(Card card : cardList) {
-            if(card.supTo(maxCard)){
-                maxCard=card;
-            }
-        }
-        return maxCard.getCardValue();
-    }
+
+
 }

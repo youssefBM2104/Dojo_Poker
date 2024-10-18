@@ -126,7 +126,54 @@ class HandTest {
         handScanner.handScan(hand, 1);
         assertEquals(CardValue.R, hand.maxCardValue());
 
+    }
 
+    @Test
+    void testIsPaire(){
+        String input = "10Tr 10Ca 7Co 10Pi 2Co";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isPaire());
+
+
+        hand = new Hand();
+
+        input = "10Tr 8Ca 7Co 10Pi 2Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isPaire());
+
+
+        hand = new Hand();
+
+        input = "10Tr 10Ca";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isPaire());
+
+        hand = new Hand();
+
+        input = "10Tr";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isPaire());
+
+        hand = new Hand();
+
+        input = "10Tr 9Ca 8Ca 7Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isPaire());
 
     }
 
