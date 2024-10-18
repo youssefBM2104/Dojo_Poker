@@ -31,23 +31,19 @@ public class Hand {
     public void addCardToHand(Card card){
         this.cardList.add(card);
     }
-
-    public boolean isBrelan(Hand hand){
+    public boolean isBrelan(){
         Map<CardValue,Integer> hashmap = new HashMap<>();
 
-        for (Card card : hand.getCardList()){
-            if (hashmap.containsKey(card.getCardValue())){
-                hashmap.put(card.getCardValue(), hashmap.get(card.getCardValue())+1);
-            }
-            else{
-                hashmap.put(card.getCardValue(),1);
-            }
+        for (Card card : cardList) {
+            CardValue cardValue = card.getCardValue();
+            hashmap.put(cardValue, hashmap.getOrDefault(cardValue, 0) + 1);
         }
 
-        for (Integer n: hashmap.values()){
-            if (n==3){
-                hand.handPriority = HandPriority.BRELAN;
-                // get highest card in the brelan
+
+        for (Map.Entry<CardValue, Integer> entry : hashmap.entrySet()) {
+            if (entry.getValue() == 3) {
+                handPriority = HandPriority.BRELAN;
+                highestCard = entry.getKey();
                 return true;
             }
         }
@@ -55,15 +51,14 @@ public class Hand {
 
     }
 
-    public boolean isFullColor(Hand hand){
-        List<Card> cardList = hand.getCardList();
+    public boolean isFullColor(){
         Card firstCard = cardList.getFirst();
         for(Card card : cardList){
             if(!(firstCard.isSameColor(card))){
                 return false;
             }
         }
-        hand.handPriority = HandPriority.COULEUR;
+        handPriority = HandPriority.COULEUR;
         return true;
     }
 

@@ -2,6 +2,8 @@ package ps5.io;
 
 import ps5.player.Card;
 import ps5.player.Hand;
+import ps5.player.enums.CardColor;
+import ps5.player.enums.CardValue;
 
 import java.util.Scanner;
 
@@ -26,20 +28,49 @@ public class HandScanner {
         scanner.close();
     }
 
-    public Card getCardFromString(String cardString){
-        String cardValue="";
-        String cardColor="";
-        if (cardString.length() == 4){
-            cardValue = cardString.substring(0,2);
-            cardColor = cardString.substring(2);
-        }
-        else{
-            cardValue = cardString.substring(0,1);
-            cardColor = cardString.substring(1);
+    public Card getCardFromString(String cardString) {
+        CardValue cardValue;
+        CardColor cardColor;
+
+        // Handle the case where the card is "TEN" (4 characters)
+        if (cardString.length() == 4) {
+            cardValue = CardValue.TEN; // Always TEN when length is 4
+            cardColor = switch (cardString.substring(2)) {
+                case "Pi" -> CardColor.PI;
+                case "Tr" -> CardColor.TR;
+                case "Co" -> CardColor.CO;
+                case "Ca" -> CardColor.CA;
+                default -> throw new IllegalArgumentException("Color invalid");
+            };
+        } else {
+            // Handle other card values based on the first character
+            cardValue = switch (cardString.charAt(0)) {
+                case '2' -> CardValue.TWO;
+                case '3' -> CardValue.THREE;
+                case '4' -> CardValue.FOUR;
+                case '5' -> CardValue.FIVE;
+                case '6' -> CardValue.SIX;
+                case '7' -> CardValue.SEVEN;
+                case '8' -> CardValue.EIGHT;
+                case '9' -> CardValue.NINE;
+                case 'V' -> CardValue.V;
+                case 'D' -> CardValue.D;
+                case 'R' -> CardValue.R;
+                case 'A' -> CardValue.A;
+                default -> throw new IllegalArgumentException("Card value invalid");
+            };
+
+            cardColor = switch (cardString.substring(1)) {
+                case "Pi" -> CardColor.PI;
+                case "Tr" -> CardColor.TR;
+                case "Co" -> CardColor.CO;
+                case "Ca" -> CardColor.CA;
+                default -> throw new IllegalArgumentException("Color invalid");
+            };
         }
 
-        return new Card(cardColor,cardValue);
+        return new Card(cardColor, cardValue);
     }
-
-
 }
+
+

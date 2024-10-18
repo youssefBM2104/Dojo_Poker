@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ps5.player.Card;
 import ps5.player.Hand;
+import ps5.player.enums.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -24,25 +25,27 @@ class HandScannerTest {
     void getCardFromString() {
         Card card = handScanner.getCardFromString("10Tr");
         assertNotNull(card);
-        assertEquals("Tr", card.getCardColor());
-        assertEquals("10", card.getCardValue());
+        assertEquals(CardColor.TR, card.getCardColor());
+        assertEquals(CardValue.TEN, card.getCardValue());
+
         card = handScanner.getCardFromString("ACa");
         assertNotNull(card);
-        assertEquals("Ca", card.getCardColor());
-        assertEquals("A", card.getCardValue());
+        assertEquals(CardColor.CA, card.getCardColor());
+        assertEquals(CardValue.A, card.getCardValue());
+
         card = handScanner.getCardFromString("7Co");
         assertNotNull(card);
-        assertEquals("Co", card.getCardColor());
-        assertEquals("7", card.getCardValue());
+        assertEquals(CardColor.CO, card.getCardColor());
+        assertEquals(CardValue.SEVEN, card.getCardValue());
+
         card = handScanner.getCardFromString("RPi");
         assertNotNull(card);
-        assertEquals("Pi", card.getCardColor());
-        assertEquals("R", card.getCardValue());
+        assertEquals(CardColor.PI, card.getCardColor());
+        assertEquals(CardValue.R, card.getCardValue());
     }
 
     @Test
     void testHandInitialization() {
-
         hand.addCardToHand(handScanner.getCardFromString("10Tr"));
         hand.addCardToHand(handScanner.getCardFromString("ACa"));
         hand.addCardToHand(handScanner.getCardFromString("7Co"));
@@ -51,11 +54,11 @@ class HandScannerTest {
 
         assertEquals(5, hand.getCardList().size());
 
-        assertEquals(new Card("Tr", "10"), hand.getCardList().get(0));
-        assertEquals(new Card("Ca", "A"), hand.getCardList().get(1));
-        assertEquals(new Card("Co", "7"), hand.getCardList().get(2));
-        assertEquals(new Card("Pi", "R"), hand.getCardList().get(3));
-        assertEquals(new Card("Co", "2"), hand.getCardList().get(4));
+        assertEquals(new Card(CardColor.TR, CardValue.TEN), hand.getCardList().get(0));
+        assertEquals(new Card(CardColor.CA, CardValue.A), hand.getCardList().get(1));
+        assertEquals(new Card(CardColor.CO, CardValue.SEVEN), hand.getCardList().get(2));
+        assertEquals(new Card(CardColor.PI, CardValue.R), hand.getCardList().get(3));
+        assertEquals(new Card(CardColor.CO, CardValue.TWO), hand.getCardList().get(4));
     }
 
     @Test
@@ -67,11 +70,11 @@ class HandScannerTest {
         handScanner.handScan(hand, 1);
 
         assertEquals(5, hand.getCardList().size());
-        assertEquals(new Card("Tr", "10"), hand.getCardList().get(0));
-        assertEquals(new Card("Ca", "A"), hand.getCardList().get(1));
-        assertEquals(new Card("Co", "7"), hand.getCardList().get(2));
-        assertEquals(new Card("Pi", "R"), hand.getCardList().get(3));
-        assertEquals(new Card("Co", "2"), hand.getCardList().get(4));
+        assertEquals(new Card(CardColor.TR, CardValue.TEN), hand.getCardList().get(0));
+        assertEquals(new Card(CardColor.CA, CardValue.A), hand.getCardList().get(1));
+        assertEquals(new Card(CardColor.CO, CardValue.SEVEN), hand.getCardList().get(2));
+        assertEquals(new Card(CardColor.PI, CardValue.R), hand.getCardList().get(3));
+        assertEquals(new Card(CardColor.CO, CardValue.TWO), hand.getCardList().get(4));
     }
 
     @Test
@@ -83,8 +86,8 @@ class HandScannerTest {
         handScanner.handScan(hand, 1);
 
         assertEquals(2, hand.getCardList().size());
-        assertEquals(new Card("Tr", "10"), hand.getCardList().get(0));
-        assertEquals(new Card("Ca", "A"), hand.getCardList().get(1));
+        assertEquals(new Card(CardColor.TR, CardValue.TEN), hand.getCardList().get(0));
+        assertEquals(new Card(CardColor.CA, CardValue.A), hand.getCardList().get(1));
     }
 
 }
