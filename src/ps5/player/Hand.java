@@ -31,6 +31,15 @@ public class Hand {
     public void addCardToHand(Card card){
         this.cardList.add(card);
     }
+
+    public CardValue getHighestCard() {
+        return highestCard;
+    }
+
+    public HandPriority getHandPriority() {
+        return handPriority;
+    }
+
     public boolean isBrelan(){
         Map<CardValue,Integer> hashmap = new HashMap<>();
 
@@ -59,6 +68,7 @@ public class Hand {
             }
         }
         handPriority = HandPriority.COULEUR;
+        highestCard = maxCardValue();
         return true;
     }
 

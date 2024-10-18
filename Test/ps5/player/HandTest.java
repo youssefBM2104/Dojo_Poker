@@ -3,7 +3,9 @@ package ps5.player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ps5.io.HandScanner;
+import ps5.player.enums.CardColor;
 import ps5.player.enums.CardValue;
+import ps5.player.enums.HandPriority;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -30,6 +32,7 @@ class HandTest {
         hand.addCardToHand(handScanner.getCardFromString("2Co"));
 
         assertFalse(hand.isFullColor());
+        assertEquals(HandPriority.MAX_CARD_IN_HAND,hand.getHandPriority());
 
 
         hand = new Hand();
@@ -40,6 +43,8 @@ class HandTest {
         hand.addCardToHand(handScanner.getCardFromString("2Co"));
 
         assertFalse(hand.isFullColor());
+        assertEquals(HandPriority.MAX_CARD_IN_HAND,hand.getHandPriority());
+
 
 
         hand = new Hand();
@@ -50,16 +55,20 @@ class HandTest {
         hand.addCardToHand(handScanner.getCardFromString("2Tr"));
 
         assertTrue(hand.isFullColor());
+        assertEquals(HandPriority.COULEUR,hand.getHandPriority());
+        assertEquals(CardValue.A, hand.getHighestCard());
 
 
         hand = new Hand();
         hand.addCardToHand(handScanner.getCardFromString("10Tr"));
-        hand.addCardToHand(handScanner.getCardFromString("ACa"));
+        hand.addCardToHand(handScanner.getCardFromString("9Ca"));
         hand.addCardToHand(handScanner.getCardFromString("7Ca"));
         hand.addCardToHand(handScanner.getCardFromString("RCa"));
         hand.addCardToHand(handScanner.getCardFromString("2Ca"));
 
         assertFalse(hand.isFullColor());
+        assertEquals(HandPriority.MAX_CARD_IN_HAND,hand.getHandPriority());
+
     }
 
 
