@@ -32,6 +32,15 @@ public class Hand {
         this.cardList.add(card);
     }
 
+    public CardValue getHighestCard() {
+        return highestCard;
+    }
+
+    public HandPriority getHandPriority() {
+        return handPriority;
+    }
+
+
     public CardValue maxCardValue(){
 
         Card maxCard = cardList.getFirst();
@@ -91,10 +100,8 @@ public class Hand {
             }
         }
         handPriority = HandPriority.COULEUR;
+        highestCard = maxCardValue();
         return true;
     }
-
-
-
 
 }
