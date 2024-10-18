@@ -65,4 +65,15 @@ public class Hand {
         hand.handPriority = HandPriority.COULEUR;
         return true;
     }
+
+    public CardValue maxMain(Hand hand){
+        List<Card> cardList = hand.getCardList();
+        Card maxCard = cardList.getFirst();
+        for(Card card : cardList) {
+            if(card.supTo(maxCard)){
+                maxCard=card;
+            }
+        }
+        return maxCard.getCardValue();
+    }
 }

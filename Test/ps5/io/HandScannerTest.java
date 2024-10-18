@@ -86,4 +86,5 @@ class HandScannerTest {
         assertEquals(new Card("Tr", "10"), hand.getCardList().get(0));
         assertEquals(new Card("Ca", "A"), hand.getCardList().get(1));
     }
+
 }
