@@ -3,6 +3,7 @@ package ps5.player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ps5.io.HandScanner;
+import ps5.player.enums.CardValue;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -92,4 +93,41 @@ class HandTest {
         assertFalse(hand.isBrelan());
 
     }
+
+    @Test
+    void testMaxCardValue() {
+        String input = "10Tr 10Ca 7Co 10Pi 2Co";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+        assertEquals(CardValue.TEN, hand.maxCardValue());
+
+        hand = new Hand();
+
+        input = "7Tr ACa 7Co 10Pi 2Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+        assertEquals(CardValue.A, hand.maxCardValue());
+
+        hand = new Hand();
+
+        input = "7Tr ACa";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+        assertEquals(CardValue.A, hand.maxCardValue());
+
+        hand = new Hand();
+
+        input = "7Tr DCa VCo RPi";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+        assertEquals(CardValue.R, hand.maxCardValue());
+
+
+
+    }
+
 }

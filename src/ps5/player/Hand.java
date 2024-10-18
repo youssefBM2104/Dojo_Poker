@@ -62,8 +62,8 @@ public class Hand {
         return true;
     }
 
-    public CardValue maxMain(Hand hand){
-        List<Card> cardList = hand.getCardList();
+    public CardValue maxCardValue(){
+
         Card maxCard = cardList.getFirst();
         for(Card card : cardList) {
             if(card.supTo(maxCard)){
