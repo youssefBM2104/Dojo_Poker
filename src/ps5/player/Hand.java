@@ -45,6 +45,8 @@ public class Hand {
 
         for (Integer n: hashmap.values()){
             if (n==3){
+                hand.handPriority = HandPriority.BRELAN;
+                // get highest card in the brelan
                 return true;
             }
         }
@@ -60,6 +62,7 @@ public class Hand {
                 return false;
             }
         }
+        hand.handPriority = HandPriority.COULEUR;
         return true;
     }
 }
