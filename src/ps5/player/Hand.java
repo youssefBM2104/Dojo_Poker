@@ -12,11 +12,13 @@ public class Hand {
     private List<Card>cardList;
     private HandPriority handPriority;
     private CardValue highestCard;
+    Map<CardValue,Integer> hashMapFromHand;
 
     public Hand() {
         this.cardList = new ArrayList<>();
         handPriority =HandPriority.MAX_CARD_IN_HAND;
         highestCard = CardValue.TWO;
+        hashMapFromHand =   new HashMap<>();
 
     }
 
@@ -30,6 +32,7 @@ public class Hand {
 
     public void addCardToHand(Card card){
         this.cardList.add(card);
+        updateHashMap(card);
     }
 
     public CardValue getHighestCard() {
@@ -53,29 +56,12 @@ public class Hand {
     }
 
     public boolean isPaire(){
-        Map<CardValue,Integer> hashmap =getHashMapFromHand();
-
-        for (Map.Entry<CardValue, Integer> entry : hashmap.entrySet()) {
-            if (entry.getValue() >= 2) {
-                handPriority = HandPriority.PAIRE;
-                highestCard = entry.getKey();
-                return true;
-            }
-        }
-        return false;
+        return checkForNtuple(2,HandPriority.PAIRE);
 
     }
 
     public boolean isBrelan(){
-        Map<CardValue,Integer> hashmap =getHashMapFromHand();
-        for (Map.Entry<CardValue, Integer> entry : hashmap.entrySet()) {
-            if (entry.getValue() >= 3) {
-                handPriority = HandPriority.BRELAN;
-                highestCard = entry.getKey();
-                return true;
-            }
-        }
-        return false;
+        return checkForNtuple(3,HandPriority.BRELAN);
 
     }
 
@@ -91,15 +77,27 @@ public class Hand {
         return true;
     }
 
-    private Map<CardValue,Integer> getHashMapFromHand(){
-        Map<CardValue,Integer> hashMap = new HashMap<>();
-
-        for (Card card : cardList) {
-            CardValue cardValue = card.getCardValue();
-            hashMap.put(cardValue, hashMap.getOrDefault(cardValue, 0) + 1);
+    public boolean isFullHouse(){
+        if (hashMapFromHand.size()!=2){
+            return false;
         }
+        return checkForNtuple(3,HandPriority.FULL);
 
-        return hashMap;
     }
 
+    private void updateHashMap(Card card){
+        CardValue cardValue = card.getCardValue();
+        hashMapFromHand.put(cardValue, hashMapFromHand.getOrDefault(cardValue, 0) + 1);
+    }
+
+    private boolean checkForNtuple(int n,HandPriority handPriority){
+        for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
+            if (entry.getValue() == n) {
+                this.handPriority = handPriority;
+                highestCard = maxCardValue();
+                return true;
+            }
+        }
+        return false;
+    }
 }

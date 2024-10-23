@@ -80,6 +80,8 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertTrue(hand.isBrelan());
+        assertEquals(HandPriority.BRELAN, hand.getHandPriority());
+        assertEquals(CardValue.TEN,hand.getHighestCard());
 
 
         hand = new Hand();
@@ -90,6 +92,7 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertFalse(hand.isBrelan());
+        assertNotEquals(HandPriority.BRELAN, hand.getHandPriority());
 
 
         hand = new Hand();
@@ -100,6 +103,7 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertFalse(hand.isBrelan());
+        assertNotEquals(HandPriority.BRELAN, hand.getHandPriority());
 
     }
 
@@ -144,7 +148,8 @@ class HandTest {
         System.setIn(in);
         handScanner.handScan(hand, 1);
 
-        assertTrue(hand.isPaire());
+        assertFalse(hand.isPaire());
+        assertNotEquals(HandPriority.PAIRE, hand.getHandPriority());
 
 
         hand = new Hand();
@@ -155,6 +160,8 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertTrue(hand.isPaire());
+        assertEquals(HandPriority.PAIRE, hand.getHandPriority());
+        assertEquals(CardValue.TEN,hand.getHighestCard());
 
 
         hand = new Hand();
@@ -165,6 +172,8 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertTrue(hand.isPaire());
+        assertEquals(HandPriority.PAIRE, hand.getHandPriority());
+        assertEquals(CardValue.TEN,hand.getHighestCard());
 
         hand = new Hand();
 
@@ -174,6 +183,7 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertFalse(hand.isPaire());
+        assertNotEquals(HandPriority.PAIRE, hand.getHandPriority());
 
         hand = new Hand();
 
@@ -183,7 +193,54 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertFalse(hand.isPaire());
+        assertNotEquals(HandPriority.PAIRE, hand.getHandPriority());
 
     }
+
+    @Test
+    void testIsFull() {
+        String input = "10Tr 10Ca 7Co 10Pi 7Pi";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isFullHouse());
+        assertEquals(HandPriority.FULL, hand.getHandPriority());
+        assertEquals(CardValue.TEN,hand.getHighestCard());
+
+        hand = new Hand();
+
+        input = "10Tr 8Ca 7Co 10Pi 2Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isFullHouse());
+        assertNotEquals(HandPriority.FULL, hand.getHandPriority());
+
+        hand = new Hand();
+
+        input = "10Tr 10Ca 7Co 8Pi 2Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isFullHouse());
+        assertNotEquals(HandPriority.FULL, hand.getHandPriority());
+
+        hand = new Hand();
+
+
+        input = "10Tr 10Ca 10Co 8Pi 2Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isFullHouse());
+        assertNotEquals(HandPriority.FULL, hand.getHandPriority());
+
+
+    }
+
 
 }

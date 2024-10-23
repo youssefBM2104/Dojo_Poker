@@ -17,6 +17,10 @@ public class HandScanner {
         System.out.print("Main "+ handNumber +": ");
         String line = scanner.nextLine();
 
+        if (line.isEmpty()) {
+            System.out.println("No cards entered. Please provide at least one card.");
+            return;
+        }
         // Split the line into words
         String[] cardsString = line.split("\\s+");  // Uses "\\s+" to split by one or more spaces
 
