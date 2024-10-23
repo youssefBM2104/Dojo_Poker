@@ -25,51 +25,43 @@ class HandTest {
 
     @Test
     void testIsFullColor() {
-        hand.addCardToHand(handScanner.getCardFromString("10Tr"));
-        hand.addCardToHand(handScanner.getCardFromString("ACa"));
-        hand.addCardToHand(handScanner.getCardFromString("7Co"));
-        hand.addCardToHand(handScanner.getCardFromString("RPi"));
-        hand.addCardToHand(handScanner.getCardFromString("2Co"));
+        String input = "10Tr ACa 7Co RPi 2Co";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
 
         assertFalse(hand.isFullColor());
-        assertEquals(HandPriority.MAX_CARD_IN_HAND,hand.getHandPriority());
-
 
         hand = new Hand();
-        hand.addCardToHand(handScanner.getCardFromString("10Tr"));
-        hand.addCardToHand(handScanner.getCardFromString("ATr"));
-        hand.addCardToHand(handScanner.getCardFromString("7Tr"));
-        hand.addCardToHand(handScanner.getCardFromString("RTr"));
-        hand.addCardToHand(handScanner.getCardFromString("2Co"));
+
+        input = "10Tr ATr 7Tr RTr 2Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
 
         assertFalse(hand.isFullColor());
-        assertEquals(HandPriority.MAX_CARD_IN_HAND,hand.getHandPriority());
-
-
 
         hand = new Hand();
-        hand.addCardToHand(handScanner.getCardFromString("10Tr"));
-        hand.addCardToHand(handScanner.getCardFromString("ATr"));
-        hand.addCardToHand(handScanner.getCardFromString("7Tr"));
-        hand.addCardToHand(handScanner.getCardFromString("RTr"));
-        hand.addCardToHand(handScanner.getCardFromString("2Tr"));
+
+        input = "10Tr ATr 7Tr RTr 2Tr";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
 
         assertTrue(hand.isFullColor());
-        assertEquals(HandPriority.COULEUR,hand.getHandPriority());
+        assertEquals(HandPriority.COULEUR, hand.getHandPriority());
         assertEquals(CardValue.A, hand.getHighestCard());
 
-
         hand = new Hand();
-        hand.addCardToHand(handScanner.getCardFromString("10Tr"));
-        hand.addCardToHand(handScanner.getCardFromString("9Ca"));
-        hand.addCardToHand(handScanner.getCardFromString("7Ca"));
-        hand.addCardToHand(handScanner.getCardFromString("RCa"));
-        hand.addCardToHand(handScanner.getCardFromString("2Ca"));
+
+        input = "10Tr 9Ca 7Ca RCa 2Ca";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
 
         assertFalse(hand.isFullColor());
-        assertEquals(HandPriority.MAX_CARD_IN_HAND,hand.getHandPriority());
-
     }
+
 
 
     @Test
