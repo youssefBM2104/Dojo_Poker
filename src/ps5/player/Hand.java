@@ -53,13 +53,7 @@ public class Hand {
     }
 
     public boolean isPaire(){
-        Map<CardValue,Integer> hashmap = new HashMap<>();
-
-        for (Card card : cardList) {
-            CardValue cardValue = card.getCardValue();
-            hashmap.put(cardValue, hashmap.getOrDefault(cardValue, 0) + 1);
-        }
-
+        Map<CardValue,Integer> hashmap =getHashMapFromHand();
 
         for (Map.Entry<CardValue, Integer> entry : hashmap.entrySet()) {
             if (entry.getValue() >= 2) {
@@ -73,14 +67,7 @@ public class Hand {
     }
 
     public boolean isBrelan(){
-        Map<CardValue,Integer> hashmap = new HashMap<>();
-
-        for (Card card : cardList) {
-            CardValue cardValue = card.getCardValue();
-            hashmap.put(cardValue, hashmap.getOrDefault(cardValue, 0) + 1);
-        }
-
-
+        Map<CardValue,Integer> hashmap =getHashMapFromHand();
         for (Map.Entry<CardValue, Integer> entry : hashmap.entrySet()) {
             if (entry.getValue() >= 3) {
                 handPriority = HandPriority.BRELAN;
@@ -102,6 +89,17 @@ public class Hand {
         handPriority = HandPriority.COULEUR;
         highestCard = maxCardValue();
         return true;
+    }
+
+    private Map<CardValue,Integer> getHashMapFromHand(){
+        Map<CardValue,Integer> hashMap = new HashMap<>();
+
+        for (Card card : cardList) {
+            CardValue cardValue = card.getCardValue();
+            hashMap.put(cardValue, hashMap.getOrDefault(cardValue, 0) + 1);
+        }
+
+        return hashMap;
     }
 
 }
