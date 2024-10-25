@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Hand implements handInterface {
+public class Hand implements HandInterface {
     private List<Card>cardList;
     private HandPriority handPriority;
     private CardValue highestCard;

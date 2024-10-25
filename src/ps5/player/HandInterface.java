@@ -1,6 +1,6 @@
 package ps5.player;
 
-public interface handInterface {
+public interface HandInterface {
     public boolean isPaire();
 
     public boolean isBrelan();
