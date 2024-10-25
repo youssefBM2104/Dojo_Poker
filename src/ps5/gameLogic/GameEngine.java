@@ -14,20 +14,6 @@ import java.util.List;
 
 public class GameEngine {
 
-    public void runAllPossibleHands(Hand hand){
-        boolean result = false;
-        for (Method method : HandInterface.class.getMethods()){
-            try {
-                result = (Boolean) method.invoke(hand);
-            }catch (Exception e){
-                System.out.println("This should never happen");
-                return;
-            }
-            if (result){
-                break;
-            }
-        }
-    }
 
     public HandId whoWon(Hand hand1, Hand hand2){
         if (hand1.getHandPriority().ordinal() > hand2.getHandPriority().ordinal()){

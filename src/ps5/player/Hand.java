@@ -3,6 +3,7 @@ package ps5.player;
 import ps5.player.enums.CardValue;
 import ps5.player.enums.HandPriority;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Hand implements HandInterface {
         highestCard = CardValue.TWO;
         hashMapFromHand =   new HashMap<>();
 
+
     }
 
     public List<Card> getCardList() {
@@ -33,6 +35,10 @@ public class Hand implements HandInterface {
     public void addCardToHand(Card card){
         this.cardList.add(card);
         updateHashMap(card);
+        if (cardList.size()==5){
+            runAllPossibleHands();
+        }
+
     }
 
     public CardValue getHighestCard() {
@@ -104,4 +110,20 @@ public class Hand implements HandInterface {
         }
         return false;
     }
+
+    public void runAllPossibleHands(){
+        boolean result = false;
+        for (Method method : HandInterface.class.getMethods()){
+            try {
+                result = (Boolean) method.invoke(this);
+            }catch (Exception e){
+                System.out.println("This should never happen");
+                return;
+            }
+            if (result){
+                break;
+            }
+        }
+    }
+
 }
