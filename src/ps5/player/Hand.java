@@ -68,6 +68,14 @@ public class Hand implements HandInterface {
     }
 
     @Override
+    public boolean isCarre() {
+        if (hashMapFromHand.size()!=2){
+            return false;
+        }
+        return checkForNtuple(4,HandPriority.CARRE);
+    }
+
+    @Override
     public boolean isBrelan(){
         return checkForNtuple(3,HandPriority.BRELAN);
 

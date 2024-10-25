@@ -9,6 +9,8 @@ public class Game {
     public static void main(String[] args) {
         HandScanner handScanner = new HandScanner();
 
+        //TODO: FIX PAIRE MAX READ THE RULES
+
         boolean ok1;
         Hand hand1;
         do {

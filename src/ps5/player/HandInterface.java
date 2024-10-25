@@ -5,7 +5,7 @@ public interface HandInterface {
     boolean isFullColor();
     boolean isBrelan();
     boolean isPaire();
-
+    boolean isCarre();
 
 
 
