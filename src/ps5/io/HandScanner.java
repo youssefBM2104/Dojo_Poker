@@ -31,13 +31,12 @@ public class HandScanner {
         for (String cardString : cardsString) {
             Card card = getCardFromString(cardString);
             if (hand.getCardList().contains(card)){
+                System.out.println("Please provide exactly 5 distinct cards!");
                 return false;
             }
             hand.addCardToHand(card);
         }
 
-        // Close the scanner
-        scanner.close();
         return true;
     }
 

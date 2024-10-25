@@ -103,7 +103,9 @@ public class Hand implements HandInterface {
     private boolean checkForNtuple(int n,HandPriority handPriority){
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue() == n) {
-                this.handPriority = handPriority;
+                if (handPriority.ordinal()>this.handPriority.ordinal()){
+                    this.handPriority = handPriority;
+                }
                 highestCard = maxCardValue();
                 return true;
             }
@@ -112,16 +114,12 @@ public class Hand implements HandInterface {
     }
 
     public void runAllPossibleHands(){
-        boolean result = false;
         for (Method method : HandInterface.class.getMethods()){
             try {
-                result = (Boolean) method.invoke(this);
+                 method.invoke(this);
             }catch (Exception e){
                 System.out.println("This should never happen");
                 return;
-            }
-            if (result){
-                break;
             }
         }
     }
