@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Hand {
+public class Hand implements handInterface {
     private List<Card>cardList;
     private HandPriority handPriority;
     private CardValue highestCard;
@@ -55,16 +55,19 @@ public class Hand {
         return maxCard.getCardValue();
     }
 
+    @Override
     public boolean isPaire(){
         return checkForNtuple(2,HandPriority.PAIRE);
 
     }
 
+    @Override
     public boolean isBrelan(){
         return checkForNtuple(3,HandPriority.BRELAN);
 
     }
 
+    @Override
     public boolean isFullColor(){
         Card firstCard = cardList.getFirst();
         for(Card card : cardList){
@@ -77,6 +80,7 @@ public class Hand {
         return true;
     }
 
+    @Override
     public boolean isFullHouse(){
         if (hashMapFromHand.size()!=2){
             return false;
