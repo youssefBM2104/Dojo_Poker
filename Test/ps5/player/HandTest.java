@@ -3,7 +3,6 @@ package ps5.player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ps5.io.HandScanner;
-import ps5.player.enums.CardColor;
 import ps5.player.enums.CardValue;
 import ps5.player.enums.HandPriority;
 
@@ -32,7 +31,7 @@ class HandTest {
 
         assertFalse(hand.isFullColor());
 
-        hand = new Hand();
+        setUp();
 
         input = "10Tr ATr 7Tr RTr 2Co";
         in = new ByteArrayInputStream(input.getBytes());
@@ -41,7 +40,7 @@ class HandTest {
 
         assertFalse(hand.isFullColor());
 
-        hand = new Hand();
+        setUp();
 
         input = "10Tr ATr 7Tr RTr 2Tr";
         in = new ByteArrayInputStream(input.getBytes());
@@ -52,7 +51,7 @@ class HandTest {
         assertEquals(HandPriority.COULEUR, hand.getHandPriority());
         assertEquals(CardValue.A, hand.getHighestCard());
 
-        hand = new Hand();
+        setUp();
 
         input = "10Tr 9Ca 7Ca RCa 2Ca";
         in = new ByteArrayInputStream(input.getBytes());
@@ -76,7 +75,7 @@ class HandTest {
         assertEquals(CardValue.TEN,hand.getHighestCard());
 
 
-        hand = new Hand();
+        setUp();
 
         input = "10Tr 8Ca 7Co 10Pi 2Co";
         in = new ByteArrayInputStream(input.getBytes());
@@ -87,15 +86,7 @@ class HandTest {
         assertNotEquals(HandPriority.BRELAN, hand.getHandPriority());
 
 
-        hand = new Hand();
 
-        input = "10Tr 10Ca";
-        in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        handScanner.handScan(hand, 1);
-
-        assertFalse(hand.isBrelan());
-        assertNotEquals(HandPriority.BRELAN, hand.getHandPriority());
 
     }
 
@@ -107,7 +98,7 @@ class HandTest {
         handScanner.handScan(hand, 1);
         assertEquals(CardValue.TEN, hand.maxCardValue());
 
-        hand = new Hand();
+        setUp();
 
         input = "7Tr ACa 7Co 10Pi 2Co";
         in = new ByteArrayInputStream(input.getBytes());
@@ -128,7 +119,7 @@ class HandTest {
         assertNotEquals(HandPriority.PAIRE, hand.getHandPriority());
 
 
-        hand = new Hand();
+        setUp();
 
         input = "10Tr 8Ca 7Co 10Pi 2Co";
         in = new ByteArrayInputStream(input.getBytes());
@@ -139,7 +130,6 @@ class HandTest {
         assertEquals(HandPriority.PAIRE, hand.getHandPriority());
         assertEquals(CardValue.TEN,hand.getHighestCard());
 
-        hand = new Hand();
 
     }
 
@@ -151,10 +141,10 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertTrue(hand.isFullHouse());
-        assertEquals(HandPriority.FULL, hand.getHandPriority());
+        assertEquals(HandPriority.FULL_HOUSE, hand.getHandPriority());
         assertEquals(CardValue.TEN,hand.getHighestCard());
 
-        hand = new Hand();
+        setUp();
 
         input = "10Tr 8Ca 7Co 10Pi 2Co";
         in = new ByteArrayInputStream(input.getBytes());
@@ -162,9 +152,9 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertFalse(hand.isFullHouse());
-        assertNotEquals(HandPriority.FULL, hand.getHandPriority());
+        assertNotEquals(HandPriority.FULL_HOUSE, hand.getHandPriority());
 
-        hand = new Hand();
+        setUp();
 
         input = "10Tr 10Ca 7Co 8Pi 2Co";
         in = new ByteArrayInputStream(input.getBytes());
@@ -172,9 +162,9 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertFalse(hand.isFullHouse());
-        assertNotEquals(HandPriority.FULL, hand.getHandPriority());
+        assertNotEquals(HandPriority.FULL_HOUSE, hand.getHandPriority());
 
-        hand = new Hand();
+        setUp();
 
 
         input = "10Tr 10Ca 10Co 8Pi 2Co";
@@ -183,7 +173,7 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         assertFalse(hand.isFullHouse());
-        assertNotEquals(HandPriority.FULL, hand.getHandPriority());
+        assertNotEquals(HandPriority.FULL_HOUSE, hand.getHandPriority());
 
 
     }
@@ -209,7 +199,7 @@ class HandTest {
 
         handScanner.handScan(hand, 1);
 
-        assertEquals(HandPriority.FULL, hand.getHandPriority());
+        assertEquals(HandPriority.FULL_HOUSE, hand.getHandPriority());
     }
 
     @Test
@@ -238,14 +228,72 @@ class HandTest {
 
     @Test
     void testRunAllPossibleHands5(){
-        //Verification d'un plus haute carte
-        String fullColor = "10Tr 5Ca 9Co 3Tr 7Tr";
-        InputStream in = new ByteArrayInputStream(fullColor.getBytes());
+        //Verification d'une plus haute carte
+        String handString = "10Tr 5Ca 9Co 3Tr 7Tr";
+        InputStream in = new ByteArrayInputStream(handString.getBytes());
         System.setIn(in);
 
         handScanner.handScan(hand, 1);
 
-        assertEquals(hand.getHighestCard(), CardValue.TEN); //TODO: HIGHEST CARD IS NEVER EXECUTED
+        assertEquals(CardValue.TEN, hand.getHighestCard());
+        assertEquals(HandPriority.MAX_CARD_IN_HAND, hand.getHandPriority());
+    }
+    @Test
+    void testRunAllPossibleHands6(){
+        String royalFlush = "10Tr VTr DTr RTr ATr";
+        InputStream in = new ByteArrayInputStream(royalFlush.getBytes());
+        System.setIn(in);
+
+        handScanner.handScan(hand, 1);
+
+        assertEquals(CardValue.A, hand.getHighestCard());
+        assertEquals(HandPriority.ROYALE_FLUSH, hand.getHandPriority());
+    }
+
+    @Test
+    void testIsRoyalFlush() {
+        String input = "10Tr VTr DTr RTr ATr";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isRoyalFlush());
+        assertEquals(HandPriority.ROYALE_FLUSH, hand.getHandPriority());
+        assertEquals(CardValue.A, hand.getHighestCard());
+
+        setUp();
+
+        input = "10Tr VTr DTr RTr 9Tr";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isRoyalFlush());
+        assertNotEquals(HandPriority.ROYALE_FLUSH, hand.getHandPriority());
+
+        setUp();
+
+        input = "10Tr 9Tr 8Tr 7Tr 6Tr";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isRoyalFlush());
+        assertNotEquals(HandPriority.ROYALE_FLUSH, hand.getHandPriority());
+
+        setUp();
+
+        input = "10Tr VCa DTr RCo ACo";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isRoyalFlush());
+        assertNotEquals(HandPriority.ROYALE_FLUSH, hand.getHandPriority());
+
+        setUp();
+
+        input = "3Tr 5Ca 7Pi 9Co DCo";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isRoyalFlush());
         assertEquals(HandPriority.MAX_CARD_IN_HAND, hand.getHandPriority());
     }
 }

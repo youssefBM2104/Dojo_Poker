@@ -9,7 +9,7 @@ public class Game {
     public static void main(String[] args) {
         HandScanner handScanner = new HandScanner();
 
-        //TODO: FIX PAIRE MAX READ THE RULES AND FIX DUPLICATES IN HANDSCANNER
+        //TODO: FIX PAIRE MAX READ THE RULES
 
         boolean ok1;
         Hand hand1;
@@ -25,8 +25,7 @@ public class Game {
             ok2 = handScanner.handScan(hand2, 2);
         } while (!ok2);
 
-        hand1.runAllPossibleHands();
-        hand2.runAllPossibleHands();
+
 
         GameEngine gameEngine = new GameEngine();
         HandId winner = gameEngine.whoWon(hand1,hand2);

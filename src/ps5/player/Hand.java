@@ -4,10 +4,7 @@ import ps5.player.enums.CardValue;
 import ps5.player.enums.HandPriority;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Hand implements HandInterface {
     private List<Card>cardList;
@@ -89,8 +86,10 @@ public class Hand implements HandInterface {
                 return false;
             }
         }
-        handPriority = HandPriority.COULEUR;
-        highestCard = maxCardValue();
+        if (handPriority.ordinal()<HandPriority.COULEUR.ordinal()){
+            handPriority = HandPriority.COULEUR;
+            highestCard = maxCardValue();
+        }
         return true;
     }
 
@@ -99,9 +98,33 @@ public class Hand implements HandInterface {
         if (hashMapFromHand.size()!=2){
             return false;
         }
-        return checkForNtuple(3,HandPriority.FULL);
+        return checkForNtuple(3,HandPriority.FULL_HOUSE);
 
     }
+
+    @Override
+    public boolean isRoyalFlush() {
+        if (!isFullColor()) {
+            return false;
+        }
+
+        List<CardValue> royalFlushValues = List.of(CardValue.TEN, CardValue.V, CardValue.D, CardValue.R, CardValue.A);
+
+
+        for (CardValue value : royalFlushValues) {
+            if (!hashMapFromHand.containsKey(value)) {
+                return false;
+            }
+        }
+
+        if (handPriority.ordinal()<HandPriority.ROYALE_FLUSH.ordinal()){
+            handPriority = HandPriority.ROYALE_FLUSH;
+            highestCard = CardValue.A;
+        }
+
+        return true;
+    }
+
 
     private void updateHashMap(Card card){
         CardValue cardValue = card.getCardValue();

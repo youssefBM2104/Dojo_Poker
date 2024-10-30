@@ -7,8 +7,8 @@ public enum HandPriority {
     BRELAN,
     SUITE,
     COULEUR,
-    FULL,
+    FULL_HOUSE,
     CARRE,
-    QUINTE_FLUSH,
-    QUINTE_FLUSH_ROYALE,
+    FLUSH,
+    ROYALE_FLUSH,
 }
