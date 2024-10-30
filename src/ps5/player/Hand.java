@@ -149,8 +149,7 @@ public class Hand implements HandInterface {
             try {
                  method.invoke(this);
             }catch (Exception e){
-                System.out.println("This should never happen");
-                return;
+                throw new RuntimeException("this should never happen",e);
             }
         }
         if (handPriority==HandPriority.MAX_CARD_IN_HAND){

@@ -251,6 +251,17 @@ class HandTest {
     }
 
     @Test
+    void testRunAllPossibleHands7(){
+        String carre = "10Tr 10Ca 10Co 10Pi 2Co";
+        InputStream in = new ByteArrayInputStream(carre.getBytes());
+        System.setIn(in);
+
+        handScanner.handScan(hand, 1);
+
+        assertEquals(CardValue.TEN, hand.getHighestCard());
+        assertEquals(HandPriority.CARRE, hand.getHandPriority());
+    }
+    @Test
     void testIsRoyalFlush() {
         String input = "10Tr VTr DTr RTr ATr";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
@@ -295,5 +306,53 @@ class HandTest {
 
         assertFalse(hand.isRoyalFlush());
         assertEquals(HandPriority.MAX_CARD_IN_HAND, hand.getHandPriority());
+    }
+
+    @Test
+    void testIsCarre(){
+        String input = "10Tr 10Ca 10Co 10Pi 2Co";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isCarre());
+        assertEquals(HandPriority.CARRE, hand.getHandPriority());
+        assertEquals(CardValue.TEN, hand.getHighestCard());
+
+        setUp();
+
+        input = "10Tr 10Ca 9Co 10Pi 2Co";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isCarre());
+        assertNotEquals(HandPriority.CARRE, hand.getHandPriority());
+
+        setUp();
+
+        input = "VTr VCa VCo VPi 2Co";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isCarre());
+        assertEquals(HandPriority.CARRE, hand.getHandPriority());
+        assertEquals(CardValue.V, hand.getHighestCard());
+
+        setUp();
+
+        input = "10Tr 10Ca 9Co 9Pi 2Co";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isCarre());
+        assertNotEquals(HandPriority.CARRE, hand.getHandPriority());
+
+        setUp();
+
+        input = "10Tr 10Ca 10Co 8Pi 2Co";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isCarre());
+        assertNotEquals(HandPriority.CARRE, hand.getHandPriority());
     }
 }
