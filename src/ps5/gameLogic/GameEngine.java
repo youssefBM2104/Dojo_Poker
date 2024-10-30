@@ -30,7 +30,7 @@ public class GameEngine {
                 return HandId.HAND_2;
             }
             else{
-                return HandId.DEFAULT;
+                return HandId.DEFAULT;// TODO: KEEP ITTERATING ON THE REST OF HAND UNTIL YOU FIND A BIGGER CARD (POSSIBLE RECURSION)
             }
         }
     }

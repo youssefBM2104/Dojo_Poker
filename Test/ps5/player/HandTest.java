@@ -212,6 +212,7 @@ class HandTest {
         assertEquals(HandPriority.FULL, hand.getHandPriority());
     }
 
+    @Test
     void testRunAllPossibleHands3(){
         //Verification d'un brelan
         String brelan = "10Tr 8Ca 10Co 10Pi 7Pi";
@@ -223,6 +224,7 @@ class HandTest {
         assertEquals(HandPriority.BRELAN, hand.getHandPriority());
     }
 
+    @Test
     void testRunAllPossibleHands4(){
         //Verification d'une fullColor
         String fullColor = "10Tr 5Tr 9Tr 3Tr 7Tr";
@@ -234,6 +236,7 @@ class HandTest {
         assertEquals(HandPriority.COULEUR, hand.getHandPriority());
     }
 
+    @Test
     void testRunAllPossibleHands5(){
         //Verification d'un plus haute carte
         String fullColor = "10Tr 5Ca 9Co 3Tr 7Tr";
@@ -242,7 +245,7 @@ class HandTest {
 
         handScanner.handScan(hand, 1);
 
-        assertEquals(hand.getHighestCard(), CardValue.TEN);
+        assertEquals(hand.getHighestCard(), CardValue.TEN); //TODO: HIGHEST CARD IS NEVER EXECUTED
         assertEquals(HandPriority.MAX_CARD_IN_HAND, hand.getHandPriority());
     }
 }

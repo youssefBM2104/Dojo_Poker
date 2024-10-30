@@ -130,6 +130,9 @@ public class Hand implements HandInterface {
                 return;
             }
         }
+        if (handPriority==HandPriority.MAX_CARD_IN_HAND){
+            highestCard = maxCardValue();
+        }
     }
 
 }
