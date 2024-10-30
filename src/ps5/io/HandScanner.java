@@ -5,9 +5,13 @@ import ps5.player.Hand;
 import ps5.player.enums.CardColor;
 import ps5.player.enums.CardValue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class HandScanner {
+
+    private Hand dealtCards = new Hand();
 
     public  boolean handScan(Hand hand, int handNumber) {
         // Create a scanner to read from standard input
@@ -34,7 +38,12 @@ public class HandScanner {
                 System.out.println("Please provide exactly 5 distinct cards!");
                 return false;
             }
+            if (dealtCards.getCardList().contains(card)){
+                System.out.println("Please provide cards that weren't already dealt");
+                return false;
+            }
             hand.addCardToHand(card);
+            dealtCards.addCardToHand(card);
         }
 
         return true;
