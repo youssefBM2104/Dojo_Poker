@@ -166,7 +166,7 @@ public class Hand implements HandInterface {
                 setHighestCardFromNextPair();
                 break;
             case DEUX_PAIRES:
-                removePair(highestCard);
+                removePairFromHashMap(highestCard);
                 if (hashMapFromHand.size()!=2){
                     setHighestCardFromNextPair();
                 }
@@ -184,7 +184,7 @@ public class Hand implements HandInterface {
         cardList.removeIf(card -> card.getCardValue().equals(cardValue));
     }
 
-    public void removePair(CardValue cardValue){
+    public void removePairFromHashMap(CardValue cardValue){
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue()==2 && entry.getKey()==cardValue) {
                 hashMapFromHand.remove(cardValue);

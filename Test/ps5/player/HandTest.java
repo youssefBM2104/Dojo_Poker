@@ -408,12 +408,12 @@ class HandTest {
     }
 
     @Test
-    void testRemovePair() {
+    void testRemovePairFromHashMap() {
         String input = "10Tr 10Ca 8Co 8Pi 2Co";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         handScanner.handScan(hand, 1);
 
-        hand.removePair(CardValue.TEN);
+        hand.removePairFromHashMap(CardValue.TEN);
         assertFalse(hand.hashMapFromHand.containsKey(CardValue.TEN), "Expected the pair of 10s to be removed from the map");
     }
 
