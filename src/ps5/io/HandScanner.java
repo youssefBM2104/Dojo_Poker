@@ -11,7 +11,11 @@ import java.util.Scanner;
 
 public class HandScanner {
 
-    private Hand dealtCards = new Hand();
+    private Hand dealtCards;
+
+    public HandScanner(){
+        dealtCards = new Hand();
+    }
 
     public  boolean handScan(Hand hand, int handNumber) {
         // Create a scanner to read from standard input
@@ -38,12 +42,13 @@ public class HandScanner {
                 System.out.println("Please provide exactly 5 distinct cards!");
                 return false;
             }
-            if (dealtCards.getCardList().contains(card)){
-                System.out.println("Please provide cards that weren't already dealt");
-                return false;
-            }
+            //TODO ask teacher if cards in both hands are unique and uncomment or not the condition below based on the answer plus change tests if hands are unique
+//            if (dealtCards.getCardList().contains(card)){
+//                System.out.println("Please provide cards that weren't already dealt");
+//                return false;
+//            }
             hand.addCardToHand(card);
-            dealtCards.addCardToHand(card);
+//            dealtCards.addCardToHand(card);
         }
 
         return true;
@@ -53,7 +58,6 @@ public class HandScanner {
         CardValue cardValue;
         CardColor cardColor;
 
-        // Handle the case where the card is "TEN" (4 characters)
         if (cardString.length() == 4) {
             cardValue = CardValue.TEN; // Always TEN when length is 4
             cardColor = switch (cardString.substring(2)) {
@@ -64,7 +68,6 @@ public class HandScanner {
                 default -> throw new IllegalArgumentException("Color invalid");
             };
         } else {
-            // Handle other card values based on the first character
             cardValue = switch (cardString.charAt(0)) {
                 case '2' -> CardValue.TWO;
                 case '3' -> CardValue.THREE;

@@ -91,12 +91,12 @@ class HandTest {
     }
 
     @Test
-    void testMaxCardValue() {
+    void testMaxCardValueFromList() {
         String input = "10Tr 10Ca 7Co 10Pi 2Co";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         handScanner.handScan(hand, 1);
-        assertEquals(CardValue.TEN, hand.maxCardValue());
+        assertEquals(CardValue.TEN, hand.maxCardValueFromList());
 
         setUp();
 
@@ -104,7 +104,7 @@ class HandTest {
         in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         handScanner.handScan(hand, 1);
-        assertEquals(CardValue.A, hand.maxCardValue());
+        assertEquals(CardValue.A, hand.maxCardValueFromList());
 
     }
 
@@ -354,5 +354,76 @@ class HandTest {
 
         assertFalse(hand.isCarre());
         assertNotEquals(HandPriority.CARRE, hand.getHandPriority());
+    }
+    @Test
+    void testNextHighestCard_FullHouse() {
+        String input = "10Tr 10Ca 10Co 8Pi 8Co";  // Full House: 10s over 8s
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        hand.isFullHouse();  // Confirms this is identified as a Full House
+        assertEquals(CardValue.TEN, hand.getHighestCard());
+
+        hand.nextHighestCard();
+        assertEquals(CardValue.EIGHT, hand.getHighestCard(), "Expected the next highest card to be the second pair in Full House");
+    }
+
+    @Test
+    void testNextHighestCard_DeuxPaires() {
+        String input = "10Tr 10Ca 8Co 8Pi 7Co";  // Two pairs: 10s and 8s
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        hand.isPaire();  //TODO: change isPaire to isDoublePaire when implemented
+        assertEquals(CardValue.TEN, hand.getHighestCard());
+
+        hand.nextHighestCard();
+        assertEquals(CardValue.EIGHT, hand.getHighestCard(), "Expected the next highest card to be the second pair in Two Pairs");
+
+        hand.nextHighestCard();
+        assertEquals(CardValue.SEVEN, hand.getHighestCard(), "Expected the next highest card after removing pairs");
+    }
+
+    @Test
+    void testNextHighestCard_MaxCardInHand() {
+        String input = "10Tr 9Ca 8Co 7Pi 6Co";  // Single cards, no pairs or full house
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        hand.nextHighestCard();
+        assertEquals(CardValue.NINE, hand.getHighestCard(), "Expected the highest card to be 9 after removing the 10");
+
+        hand.nextHighestCard();
+        assertEquals(CardValue.EIGHT, hand.getHighestCard(), "Expected the highest card to be 8 after removing the 9");
+    }
+
+    @Test
+    void testRemoveCardFromList() {
+        String input = "10Tr 10Ca 7Co 7Pi 2Co";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        hand.removeCardFromList(CardValue.TEN);
+        assertFalse(hand.getCardList().stream().anyMatch(card -> card.getCardValue() == CardValue.TEN), "Expected all 10s to be removed from the hand");
+    }
+
+    @Test
+    void testRemovePair() {
+        String input = "10Tr 10Ca 8Co 8Pi 2Co";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        hand.removePair(CardValue.TEN);
+        assertFalse(hand.hashMapFromHand.containsKey(CardValue.TEN), "Expected the pair of 10s to be removed from the map");
+    }
+
+    @Test
+    void testSetHighestCardFromNextPair() {
+        String input = "10Tr 10Ca 8Co 8Pi 2Co";  // Two pairs
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        handScanner.handScan(hand, 1);
+
+        hand.setHighestCardFromNextPair();
+        assertEquals(CardValue.TEN, hand.getHighestCard(), "Expected the highest card to be set to 10 as it is the highest pair");
     }
 }

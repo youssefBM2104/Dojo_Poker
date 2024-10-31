@@ -47,7 +47,7 @@ public class Hand implements HandInterface {
     }
 
 
-    public CardValue maxCardValue(){
+    public CardValue maxCardValueFromList(){
 
         Card maxCard = cardList.getFirst();
         for(Card card : cardList) {
@@ -60,7 +60,7 @@ public class Hand implements HandInterface {
 
     @Override
     public boolean isPaire(){
-        return checkForNtuple(2,HandPriority.PAIRE);
+        return checkForNTuple(2,HandPriority.PAIRE);
 
     }
 
@@ -69,12 +69,12 @@ public class Hand implements HandInterface {
         if (hashMapFromHand.size()!=2){
             return false;
         }
-        return checkForNtuple(4,HandPriority.CARRE);
+        return checkForNTuple(4,HandPriority.CARRE);
     }
 
     @Override
     public boolean isBrelan(){
-        return checkForNtuple(3,HandPriority.BRELAN);
+        return checkForNTuple(3,HandPriority.BRELAN);
 
     }
 
@@ -88,7 +88,7 @@ public class Hand implements HandInterface {
         }
         if (handPriority.ordinal()<HandPriority.COULEUR.ordinal()){
             handPriority = HandPriority.COULEUR;
-            highestCard = maxCardValue();
+            highestCard = maxCardValueFromList();
         }
         return true;
     }
@@ -98,7 +98,7 @@ public class Hand implements HandInterface {
         if (hashMapFromHand.size()!=2){
             return false;
         }
-        return checkForNtuple(3,HandPriority.FULL_HOUSE);
+        return checkForNTuple(3,HandPriority.FULL_HOUSE);
 
     }
 
@@ -131,13 +131,13 @@ public class Hand implements HandInterface {
         hashMapFromHand.put(cardValue, hashMapFromHand.getOrDefault(cardValue, 0) + 1);
     }
 
-    private boolean checkForNtuple(int n,HandPriority handPriority){
+    private boolean checkForNTuple(int n, HandPriority handPriority){
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue() == n) {
                 if (handPriority.ordinal()>this.handPriority.ordinal()){
                     this.handPriority = handPriority;
                 }
-                highestCard = maxCardValue();
+                highestCard = maxCardValueFromList();
                 return true;
             }
         }
@@ -153,8 +153,51 @@ public class Hand implements HandInterface {
             }
         }
         if (handPriority==HandPriority.MAX_CARD_IN_HAND){
-            highestCard = maxCardValue();
+            highestCard = maxCardValueFromList();
         }
     }
 
+
+
+    public void nextHighestCard(){
+        removeCardFromList(highestCard);
+        switch (handPriority){
+            case FULL_HOUSE:
+                setHighestCardFromNextPair();
+                break;
+            case DEUX_PAIRES:
+                removePair(highestCard);
+                if (hashMapFromHand.size()!=2){
+                    setHighestCardFromNextPair();
+                }
+                else {
+                    highestCard = maxCardValueFromList();
+                }
+                break;
+            default:
+                highestCard = maxCardValueFromList();
+                break;
+        }
+    }
+
+    public void removeCardFromList(CardValue cardValue){
+        cardList.removeIf(card -> card.getCardValue().equals(cardValue));
+    }
+
+    public void removePair(CardValue cardValue){
+        for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
+            if (entry.getValue()==2 && entry.getKey()==cardValue) {
+                hashMapFromHand.remove(cardValue);
+                break;
+            }
+        }
+    }
+
+    public void setHighestCardFromNextPair(){
+        for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
+            if (entry.getValue() == 2) {
+                highestCard = maxCardValueFromList();
+            }
+        }
+    }
 }

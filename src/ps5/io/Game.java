@@ -9,8 +9,6 @@ public class Game {
     public static void main(String[] args) {
         HandScanner handScanner = new HandScanner();
 
-        //TODO: FIX PAIRE MAX READ THE RULES
-
         boolean ok1;
         Hand hand1;
         do {
@@ -26,7 +24,7 @@ public class Game {
         } while (!ok2);
 
 
-
+        //TODO: add how the hand won on the output
         GameEngine gameEngine = new GameEngine();
         HandId winner = gameEngine.whoWon(hand1,hand2);
         switch (winner){
