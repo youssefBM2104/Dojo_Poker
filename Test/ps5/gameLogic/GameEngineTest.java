@@ -7,7 +7,6 @@ import ps5.player.Hand;
 import ps5.player.enums.HandId;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,7 +64,7 @@ class GameEngineTest {
 //    }
 
     @Test
-    void testWhoWon_FullHouseVsFlush() {
+    void testWhoWon_FullHouseVsCouleur() {
         String input1 = "10Tr 10Ca 10Co 8Pi 8Ca";
         System.setIn(new ByteArrayInputStream(input1.getBytes()));
         handScanner.handScan(hand1, 1);
