@@ -7,6 +7,4 @@ public interface HandInterface {
     boolean isPaire();
     boolean isCarre();
     boolean isRoyalFlush();
-
-
 }
