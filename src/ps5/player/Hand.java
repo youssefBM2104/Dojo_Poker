@@ -132,6 +132,11 @@ public class Hand implements HandInterface {
     }
 
     private boolean checkForNTuple(int n, HandPriority handPriority){
+
+        if (!hashMapFromHand.containsValue(n)){
+            return false;
+        }
+
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue() == n) {
                 if (handPriority.ordinal()>this.handPriority.ordinal()){
