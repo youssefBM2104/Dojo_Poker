@@ -5,11 +5,19 @@ import ps5.player.Hand;
 import ps5.player.enums.CardColor;
 import ps5.player.enums.CardValue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class HandScanner {
 
-    public  void handScan(Hand hand, int handNumber) {
+    private Hand dealtCards;
+
+    public HandScanner(){
+        dealtCards = new Hand();
+    }
+
+    public  boolean handScan(Hand hand, int handNumber) {
         // Create a scanner to read from standard input
         Scanner scanner = new Scanner(System.in);
 
@@ -19,24 +27,37 @@ public class HandScanner {
 
         if (line.isEmpty()) {
             System.out.println("No cards entered. Please provide at least one card.");
-            return;
+            return false;
         }
         // Split the line into words
         String[] cardsString = line.split("\\s+");  // Uses "\\s+" to split by one or more spaces
 
+        if (cardsString.length !=5){
+            System.out.println("Please provide exactly 5 cards!");
+            return false;
+        }
         for (String cardString : cardsString) {
-            hand.addCardToHand(getCardFromString(cardString));
+            Card card = getCardFromString(cardString);
+            if (hand.getCardList().contains(card)){
+                System.out.println("Please provide exactly 5 distinct cards!");
+                return false;
+            }
+            //TODO ask teacher if cards in both hands are unique and uncomment or not the condition below based on the answer plus change tests if hands are unique
+//            if (dealtCards.getCardList().contains(card)){
+//                System.out.println("Please provide cards that weren't already dealt");
+//                return false;
+//            }
+            hand.addCardToHand(card);
+//            dealtCards.addCardToHand(card);
         }
 
-        // Close the scanner
-        scanner.close();
+        return true;
     }
 
     public Card getCardFromString(String cardString) {
         CardValue cardValue;
         CardColor cardColor;
 
-        // Handle the case where the card is "TEN" (4 characters)
         if (cardString.length() == 4) {
             cardValue = CardValue.TEN; // Always TEN when length is 4
             cardColor = switch (cardString.substring(2)) {
@@ -47,7 +68,6 @@ public class HandScanner {
                 default -> throw new IllegalArgumentException("Color invalid");
             };
         } else {
-            // Handle other card values based on the first character
             cardValue = switch (cardString.charAt(0)) {
                 case '2' -> CardValue.TWO;
                 case '3' -> CardValue.THREE;

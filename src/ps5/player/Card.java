@@ -28,11 +28,7 @@ public class Card {
         return this.cardValue.ordinal() > card.cardValue.ordinal();
     }
 
-    public boolean subTo(Card card){
-        return this.cardValue.ordinal() < card.cardValue.ordinal();
-    }
-
-    public boolean areValuesEquals(Card card){
+    public boolean isSameValue(Card card){
         return this.cardValue.ordinal() == card.cardValue.ordinal();
     }
 

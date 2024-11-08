@@ -67,7 +67,7 @@ class HandScannerTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        handScanner.handScan(hand, 1);
+        assertTrue(handScanner.handScan(hand, 1));
 
         assertEquals(5, hand.getCardList().size());
         assertEquals(new Card(CardColor.TR, CardValue.TEN), hand.getCardList().get(0));
@@ -75,6 +75,12 @@ class HandScannerTest {
         assertEquals(new Card(CardColor.CO, CardValue.SEVEN), hand.getCardList().get(2));
         assertEquals(new Card(CardColor.PI, CardValue.R), hand.getCardList().get(3));
         assertEquals(new Card(CardColor.CO, CardValue.TWO), hand.getCardList().get(4));
+
+        input = "10Tr 10Tr 7Co RPi 2Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        assertFalse(handScanner.handScan( new Hand(),1));
     }
 
     @Test
@@ -83,11 +89,10 @@ class HandScannerTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        handScanner.handScan(hand, 1);
+        assertFalse(handScanner.handScan(hand, 1));
 
-        assertEquals(2, hand.getCardList().size());
-        assertEquals(new Card(CardColor.TR, CardValue.TEN), hand.getCardList().get(0));
-        assertEquals(new Card(CardColor.CA, CardValue.A), hand.getCardList().get(1));
+
+        assertEquals(0, hand.getCardList().size());
     }
 
 }
