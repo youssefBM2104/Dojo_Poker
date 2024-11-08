@@ -9,4 +9,5 @@ public interface HandInterface {
     boolean isRoyalFlush();
     boolean isSuite();
     boolean isQuinteFlush();
+    boolean isDoublePaire();
 }
