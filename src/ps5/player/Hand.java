@@ -32,9 +32,9 @@ public class Hand implements HandInterface {
     public void addCardToHand(Card card){
         this.cardList.add(card);
         updateHashMap(card);
-        if (cardList.size()==5){
-            runAllPossibleHands();
-        }
+//        if (cardList.size()==5){
+//            runAllPossibleHands();
+//        }
 
     }
 
@@ -141,8 +141,8 @@ public class Hand implements HandInterface {
             if (entry.getValue() == n) {
                 if (handPriority.ordinal()>this.handPriority.ordinal()){
                     this.handPriority = handPriority;
+                    highestCard = entry.getKey();
                 }
-                highestCard = maxCardValueFromList();
                 return true;
             }
         }
@@ -230,8 +230,8 @@ public class Hand implements HandInterface {
     @Override
     public boolean isSuite() {
 
-        this.triCardListe();
 
+        this.triCardListe();
         if(this.hashMapFromHand.size() != 5) {
             return false;
         }

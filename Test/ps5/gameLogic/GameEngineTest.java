@@ -47,6 +47,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
     }
     //TODO: uncomment tests when all methods are implemented plus check for more scenarios if needed
@@ -73,6 +75,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
     }
 
