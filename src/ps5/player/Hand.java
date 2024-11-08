@@ -133,14 +133,22 @@ public class Hand implements HandInterface {
         if(hashMapFromHand.size() != 3){
             return false;
         }
+        int counter=0;
+        CardValue temp=CardValue.TWO;
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
 
-            if (entry.getValue() == 2 && entry.getKey().ordinal()>this.highestCard.ordinal()) {
-                    highestCard = entry.getKey();
-
+            if (entry.getValue() == 2 ){
+                counter++;
+                if(entry.getKey().ordinal()>temp.ordinal()) {
+                    temp = entry.getKey();
+                }
             }
         }
-        handPriority = HandPriority.DEUX_PAIRES;
+
+        if (counter==2){ // j'ai trouvé 2 paires
+            handPriority = HandPriority.DEUX_PAIRES;
+            highestCard = temp;
+        }
         return true;
     }
 
