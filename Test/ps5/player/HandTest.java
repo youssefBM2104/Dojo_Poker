@@ -537,7 +537,10 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         hand.runAllPossibleHands();
-        hand.setHighestCardFromNextPair();
         assertEquals(CardValue.TEN, hand.getHighestCard(), "Expected the highest card to be set to 10 as it is the highest pair");
+
+        hand.removePairFromHashMap(hand.getHighestCard());
+        hand.setHighestCardFromNextPair();
+        assertEquals(CardValue.EIGHT, hand.getHighestCard(), "Expected the highest card to be set to 8 as it is the highest pair");
     }
 }
