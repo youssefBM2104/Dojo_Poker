@@ -97,6 +97,6 @@ class GameEngineTest {
 
         // Assert the expected winner
         assertEquals(expectedWinner, gameEngine.whoWon(hand1, hand2));
-    } //TODO change comments and commit
+    }
 
 }

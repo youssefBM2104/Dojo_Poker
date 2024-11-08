@@ -164,7 +164,6 @@ public class Hand   {
         return false;
     }
 
-    //TODO find a better alternative to stop executing the moment we find the highest priority
     public void runAllPossibleHands(){
         if(isRoyalFlush()) return;
         if(isQuinteFlush()) return;
