@@ -149,6 +149,7 @@ public class Hand implements HandInterface {
         return false;
     }
 
+    //TODO find a better alternative to stop executing the moment we find the highest priority
     public void runAllPossibleHands(){
         for (Method method : HandInterface.class.getMethods()){
             try {
