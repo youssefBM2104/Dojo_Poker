@@ -177,6 +177,37 @@ class HandTest {
 
 
     }
+    @Test
+    void testIsSuite(){
+        String input = "2Tr 3Ca 4Co 5Pi 6Pi";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isSuite());
+        assertEquals(HandPriority.SUITE, hand.getHandPriority());
+        assertEquals(CardValue.SIX,hand.getHighestCard());
+
+        setUp();
+
+        input = "10Tr 10Ca 10Co 8Pi 2Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isSuite());
+        assertNotEquals(HandPriority.SUITE, hand.getHandPriority());
+
+        setUp();
+
+        input = "VTr DCa RCo APi ACo";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isSuite());
+        assertNotEquals(HandPriority.SUITE, hand.getHandPriority());
+    }
 
     @Test
     void testRunAllPossibleHands1(){
@@ -260,6 +291,18 @@ class HandTest {
 
         assertEquals(CardValue.TEN, hand.getHighestCard());
         assertEquals(HandPriority.CARRE, hand.getHandPriority());
+    }
+    @Test
+    void testRunAllPossibleHands8(){
+        //verification d'une suite
+        String suite = "2Tr 3Ca 4Co 5Pi 6Pi";
+        InputStream in = new ByteArrayInputStream(suite.getBytes());
+        System.setIn(in);
+
+        handScanner.handScan(hand, 1);
+
+        assertEquals(CardValue.SIX, hand.getHighestCard());
+        assertEquals(HandPriority.SUITE, hand.getHandPriority());
     }
     @Test
     void testIsRoyalFlush() {
