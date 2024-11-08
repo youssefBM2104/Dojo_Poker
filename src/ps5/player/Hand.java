@@ -128,7 +128,7 @@ public class Hand implements HandInterface {
     //Detecter 2 doubles, dans highest card mettre le double le plus haut
     //
     @Override
-    public boolean isDoublePaire(){
+    public boolean isDoublePaire(){ //TODO detects a brelan as a double paire
 
         if(hashMapFromHand.size() != 3){
             return false;
