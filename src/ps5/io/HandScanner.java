@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class HandScanner {
 
-
+    //TODO exceptions baby
     public  boolean handScan(Hand hand, int handNumber) {
         // Create a scanner to read from standard input
         Scanner scanner = new Scanner(System.in);

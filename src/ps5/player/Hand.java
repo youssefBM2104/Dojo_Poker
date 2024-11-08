@@ -6,7 +6,7 @@ import ps5.player.enums.HandPriority;
 import java.lang.reflect.Method;
 import java.util.*;
 
-public class Hand implements HandInterface {
+public class Hand   {
     private List<Card>cardList;
     private HandPriority handPriority;
     private CardValue highestCard;
@@ -58,13 +58,11 @@ public class Hand implements HandInterface {
         return maxCard.getCardValue();
     }
 
-    @Override
     public boolean isPaire(){
         return checkForNTuple(2,HandPriority.PAIRE);
 
     }
 
-    @Override
     public boolean isCarre() {
         if (hashMapFromHand.size()!=2){
             return false;
@@ -72,13 +70,11 @@ public class Hand implements HandInterface {
         return checkForNTuple(4,HandPriority.CARRE);
     }
 
-    @Override
     public boolean isBrelan(){
         return checkForNTuple(3,HandPriority.BRELAN);
 
     }
 
-    @Override
     public boolean isFullColor(){
         Card firstCard = cardList.getFirst();
         for(Card card : cardList){
@@ -86,14 +82,11 @@ public class Hand implements HandInterface {
                 return false;
             }
         }
-        if (handPriority.ordinal()<HandPriority.COULEUR.ordinal()){
-            handPriority = HandPriority.COULEUR;
-            highestCard = maxCardValueFromList();
-        }
+        handPriority = HandPriority.COULEUR;
+        highestCard = maxCardValueFromList();
         return true;
     }
 
-    @Override
     public boolean isFullHouse(){
         if (hashMapFromHand.size()!=2){
             return false;
@@ -102,7 +95,6 @@ public class Hand implements HandInterface {
 
     }
 
-    @Override
     public boolean isRoyalFlush() {
         if (!isFullColor()) {
             return false;
@@ -117,17 +109,14 @@ public class Hand implements HandInterface {
             }
         }
 
-        if (handPriority.ordinal()<HandPriority.ROYALE_FLUSH.ordinal()){
-            handPriority = HandPriority.ROYALE_FLUSH;
-            highestCard = CardValue.A;
-        }
+        handPriority = HandPriority.ROYALE_FLUSH;
+        highestCard = CardValue.A;
 
         return true;
     }
 
     //Detecter 2 doubles, dans highest card mettre le double le plus haut
     //
-    @Override
     public boolean isDoublePaire(){
 
         if(hashMapFromHand.size() != 3){
@@ -167,10 +156,8 @@ public class Hand implements HandInterface {
 
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue() == n) {
-                if (handPriority.ordinal()>this.handPriority.ordinal()){
-                    this.handPriority = handPriority;
-                    highestCard = entry.getKey();
-                }
+                this.handPriority = handPriority;
+                highestCard = entry.getKey();
                 return true;
             }
         }
@@ -179,16 +166,17 @@ public class Hand implements HandInterface {
 
     //TODO find a better alternative to stop executing the moment we find the highest priority
     public void runAllPossibleHands(){
-        for (Method method : HandInterface.class.getMethods()){
-            try {
-                 method.invoke(this);
-            }catch (Exception e){
-                throw new RuntimeException("this should never happen",e);
-            }
-        }
-        if (handPriority==HandPriority.MAX_CARD_IN_HAND){
-            highestCard = maxCardValueFromList();
-        }
+        if(isRoyalFlush()) return;
+        if(isQuinteFlush()) return;
+        if(isCarre()) return;
+        if(isFullHouse()) return;
+        if(isFullColor()) return;
+        if(isSuite()) return;
+        if(isBrelan()) return;
+        if(isDoublePaire()) return;
+        if(isPaire()) return;
+        // else none of the above
+        highestCard = maxCardValueFromList();
     }
 
 
@@ -254,7 +242,6 @@ public class Hand implements HandInterface {
 
 
 
-    @Override
     public boolean isSuite() {
 
 
@@ -269,21 +256,16 @@ public class Hand implements HandInterface {
             }
         }
 
-        if (handPriority.ordinal()<HandPriority.SUITE.ordinal()){
             handPriority = HandPriority.SUITE;
             highestCard = cardList.getLast().getCardValue();
-        }
 
         return true;
     }
 
-    @Override
     public boolean isQuinteFlush(){
         if(isSuite() && isFullColor()){
-            if (handPriority.ordinal()<HandPriority.FLUSH.ordinal()){
-                handPriority = HandPriority.FLUSH;
-                highestCard = cardList.getLast().getCardValue();
-            }
+            handPriority = HandPriority.FLUSH;
+            highestCard = cardList.getLast().getCardValue();
             return true;
         }
         return false;
