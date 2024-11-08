@@ -355,7 +355,7 @@ class HandTest {
 
         hand.runAllPossibleHands();
         assertEquals(CardValue.EIGHT, hand.getHighestCard());
-        assertEquals(HandPriority.DEUX_PAIRES, hand.getHandPriority());
+        assertEquals(HandPriority.DOUBLE_PAIRE, hand.getHandPriority());
     }
 
     @Test

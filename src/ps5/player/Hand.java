@@ -135,6 +135,7 @@ public class Hand implements HandInterface {
         }
         int counter=0;
         CardValue temp=CardValue.TWO;
+
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
 
             if (entry.getValue() == 2 ){
@@ -146,7 +147,7 @@ public class Hand implements HandInterface {
         }
 
         if (counter==2){ // j'ai trouvé 2 paires
-            handPriority = HandPriority.DEUX_PAIRES;
+            handPriority = HandPriority.DOUBLE_PAIRE;
             highestCard = temp;
         }
         return true;
@@ -198,7 +199,7 @@ public class Hand implements HandInterface {
             case FULL_HOUSE:
                 setHighestCardFromNextPair();
                 break;
-            case DEUX_PAIRES:
+            case DOUBLE_PAIRE:
                 removePairFromHashMap(highestCard);
                 if (hashMapFromHand.size()==2){
                     setHighestCardFromNextPair();
