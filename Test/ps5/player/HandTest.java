@@ -370,11 +370,11 @@ class HandTest {
 
     @Test
     void testNextHighestCard_DeuxPaires() {
-        String input = "10Tr 10Ca 8Co 8Pi 7Co";  // Two pairs: 10s and 8s
+        String input = "10Tr 10Ca 8Co 8Pi ACo";  // Two pairs: 10s and 8s
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         handScanner.handScan(hand, 1);
 
-        hand.isPaire();  //TODO: change isPaire to isDoublePaire when implemented
+        hand.isDoublePaire();  //TODO: change isPaire to isDoublePaire when implemented
         assertEquals(CardValue.TEN, hand.getHighestCard());
 
         hand.nextHighestCard();

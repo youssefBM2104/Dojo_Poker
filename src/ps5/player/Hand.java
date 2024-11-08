@@ -125,6 +125,23 @@ public class Hand implements HandInterface {
         return true;
     }
 
+    //Detecter 2 doubles, dans highest card mettre le double le plus haut
+    //
+    @Override
+    public boolean isDoublePaire(){
+
+        if(hashMapFromHand.size() != 3){
+            return false;
+        }
+        for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
+
+            if (entry.getValue() == 2 && entry.getKey().ordinal()>this.handPriority.ordinal()) {
+                    highestCard = entry.getKey();
+            }
+        }
+        return true;
+    }
+
 
     private void updateHashMap(Card card){
         CardValue cardValue = card.getCardValue();
@@ -141,8 +158,8 @@ public class Hand implements HandInterface {
             if (entry.getValue() == n) {
                 if (handPriority.ordinal()>this.handPriority.ordinal()){
                     this.handPriority = handPriority;
+                    highestCard = entry.getKey();
                 }
-                highestCard = maxCardValueFromList();
                 return true;
             }
         }
