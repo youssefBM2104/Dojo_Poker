@@ -34,6 +34,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
     }
 
@@ -90,6 +92,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.DEFAULT, gameEngine.whoWon(hand1, hand2));
     }
     @Test
@@ -102,6 +106,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_2, gameEngine.whoWon(hand1, hand2));
     }
 
@@ -116,6 +122,8 @@ class GameEngineTest {
 //        System.setIn(new ByteArrayInputStream(input2.getBytes()));
 //        handScanner.handScan(hand2, 2);
 //
+//        hand1.runAllPossibleHands();
+//        hand2.runAllPossibleHands();
 //        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
 //    }
 
@@ -129,6 +137,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_2, gameEngine.whoWon(hand1, hand2));
     }
 
@@ -142,21 +152,25 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
     }
 
-//    @Test
-//    void testWhoWon_QuinteFlush_SameQuinteFlushDifferentHighestCard() {
-//        String input1 = "RTr DTr VTr 10Tr 9Tr";
-//        System.setIn(new ByteArrayInputStream(input1.getBytes()));
-//        handScanner.handScan(hand1, 1);
-//
-//        String input2 = "DCo VCo 10Co 9Co 8Co";
-//        System.setIn(new ByteArrayInputStream(input2.getBytes()));
-//        handScanner.handScan(hand2, 2);
-//
-//        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
-//    }
+    @Test
+    void testWhoWon_QuinteFlush_SameQuinteFlushDifferentHighestCard() {
+        String input1 = "RTr DTr VTr 10Tr 9Tr";
+        System.setIn(new ByteArrayInputStream(input1.getBytes()));
+        handScanner.handScan(hand1, 1);
+
+        String input2 = "DCo VCo 10Co 9Co 8Co";
+        System.setIn(new ByteArrayInputStream(input2.getBytes()));
+        handScanner.handScan(hand2, 2);
+
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
+        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
+    }
 
 //    @Test
 //    void testWhoWon_TwoPairs_SamePairsDifferentRemainingCard() {
@@ -168,6 +182,8 @@ class GameEngineTest {
 //        System.setIn(new ByteArrayInputStream(input2.getBytes()));
 //        handScanner.handScan(hand2, 2);
 //
+//        hand1.runAllPossibleHands();
+//        hand2.runAllPossibleHands();
 //        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
 //    }
 
@@ -181,6 +197,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
     }
     @Test
@@ -193,6 +211,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
     }
     @Test
@@ -205,6 +225,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
     }
     @Test
@@ -217,6 +239,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
     }
     @Test
@@ -229,6 +253,8 @@ class GameEngineTest {
         System.setIn(new ByteArrayInputStream(input2.getBytes()));
         handScanner.handScan(hand2, 2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
         assertEquals(HandId.DEFAULT, gameEngine.whoWon(hand1, hand2));
     }
 }
