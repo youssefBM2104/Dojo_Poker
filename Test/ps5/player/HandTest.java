@@ -269,7 +269,6 @@ class HandTest {
         System.setIn(in);
 
         handScanner.handScan(hand, 1);
-        //TODO doesnt work because of tri
         hand.runAllPossibleHands();
         assertEquals(CardValue.TEN, hand.getHighestCard());
         assertEquals(HandPriority.MAX_CARD_IN_HAND, hand.getHandPriority());
@@ -443,7 +442,6 @@ class HandTest {
 
 
         hand.runAllPossibleHands();
-        // TODO doesnt work because of tri
         hand.nextHighestCard();
         assertEquals(CardValue.NINE, hand.getHighestCard(), "Expected the highest card to be 9 after removing the 10");
 
