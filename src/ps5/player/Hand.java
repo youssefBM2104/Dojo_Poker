@@ -212,13 +212,18 @@ public class Hand implements HandInterface {
             Card cardToInsert = cardList.get(i);
             int j = i - 1;
 
+            // Déplace les éléments de cardList[0..i-1] qui sont plus grands que cardToInsert
+            // vers la droite pour faire de la place pour cardToInsert
             while (j >= 0 && cardList.get(j).supTo(cardToInsert)) {
+                cardList.set(j + 1, cardList.get(j));
                 j--;
             }
-
+            // Insère cardToInsert à la bonne position
             cardList.set(j + 1, cardToInsert);
         }
     }
+
+
 
 
 
