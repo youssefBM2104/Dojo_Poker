@@ -3,10 +3,7 @@ package ps5.player;
 import ps5.player.enums.CardValue;
 import ps5.player.enums.HandPriority;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Hand {
     private List<Card>cardList;
@@ -100,4 +97,35 @@ public class Hand {
         }
         return false;
     }
+
+
+
+    public void triCardListe() {
+        int lengthL = cardList.size();
+        for (int i = 1; i < lengthL; i++) {
+            Card cardToInsert = cardList.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && cardList.get(j).supTo(cardToInsert)) {
+                j--;
+            }
+
+            cardList.set(j + 1, cardToInsert);
+        }
+    }
+
+
+
+    private boolean isSuite(Hand hand) {
+        hand.triCardListe();
+
+        for (int i=0;i<cardList.size()-1;i++) {
+            if (cardList.get(i+1).getCardValue().ordinal()!=cardList.get(i).getCardValue().ordinal()+1){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }

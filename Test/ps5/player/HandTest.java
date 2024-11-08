@@ -9,6 +9,7 @@ import ps5.player.enums.HandPriority;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -234,5 +235,33 @@ class HandTest {
 
     }
 
+
+    @Test
+    void testTri() {
+        String input = "9Tr ACa 7Co 10Pi 2Co";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        input = "2Co 7Co 9Tr 10Pi ACa";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        Hand sortedHand = new Hand();
+        handScanner.handScan(sortedHand, 1);
+
+        hand.triCardListe();
+
+
+        assertTrue(equalsTri(hand.getCardList(),sortedHand.getCardList()));
+    }
+
+    private boolean equalsTri(List<Card> l1, List<Card> l2){
+        for(int i =0; i<l1.size();i++){
+            if (l1.get(i)!=l2.get(i)){
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
