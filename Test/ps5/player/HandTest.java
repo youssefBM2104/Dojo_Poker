@@ -177,6 +177,37 @@ class HandTest {
 
 
     }
+    @Test
+    void testIsSuite(){
+        String input = "2Tr 3Ca 4Co 5Pi 6Pi";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isSuite());
+        assertEquals(HandPriority.SUITE, hand.getHandPriority());
+        assertEquals(CardValue.SIX,hand.getHighestCard());
+
+        setUp();
+
+        input = "10Tr 10Ca 10Co 8Pi 2Co";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isSuite());
+        assertNotEquals(HandPriority.SUITE, hand.getHandPriority());
+
+        setUp();
+
+        input = "VTr DCa RCo APi ACo";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isSuite());
+        assertNotEquals(HandPriority.SUITE, hand.getHandPriority());
+    }
 
     @Test
     void testRunAllPossibleHands1(){
@@ -187,6 +218,7 @@ class HandTest {
 
         handScanner.handScan(hand, 1);
 
+        hand.runAllPossibleHands();
         assertEquals(HandPriority.PAIRE, hand.getHandPriority());
     }
 
@@ -198,6 +230,7 @@ class HandTest {
         System.setIn(in);
 
         handScanner.handScan(hand, 1);
+        hand.runAllPossibleHands();
 
         assertEquals(HandPriority.FULL_HOUSE, hand.getHandPriority());
     }
@@ -211,6 +244,7 @@ class HandTest {
 
         handScanner.handScan(hand, 1);
 
+        hand.runAllPossibleHands();
         assertEquals(HandPriority.BRELAN, hand.getHandPriority());
     }
 
@@ -223,6 +257,7 @@ class HandTest {
 
         handScanner.handScan(hand, 1);
 
+        hand.runAllPossibleHands();
         assertEquals(HandPriority.COULEUR, hand.getHandPriority());
     }
 
@@ -234,7 +269,7 @@ class HandTest {
         System.setIn(in);
 
         handScanner.handScan(hand, 1);
-
+        hand.runAllPossibleHands();
         assertEquals(CardValue.TEN, hand.getHighestCard());
         assertEquals(HandPriority.MAX_CARD_IN_HAND, hand.getHandPriority());
     }
@@ -246,6 +281,7 @@ class HandTest {
 
         handScanner.handScan(hand, 1);
 
+        hand.runAllPossibleHands();
         assertEquals(CardValue.A, hand.getHighestCard());
         assertEquals(HandPriority.ROYALE_FLUSH, hand.getHandPriority());
     }
@@ -258,8 +294,22 @@ class HandTest {
 
         handScanner.handScan(hand, 1);
 
+        hand.runAllPossibleHands();
         assertEquals(CardValue.TEN, hand.getHighestCard());
         assertEquals(HandPriority.CARRE, hand.getHandPriority());
+    }
+    @Test
+    void testRunAllPossibleHands8(){
+        //verification d'une suite
+        String suite = "2Tr 3Ca 4Co 5Pi 6Pi";
+        InputStream in = new ByteArrayInputStream(suite.getBytes());
+        System.setIn(in);
+
+        handScanner.handScan(hand, 1);
+
+        hand.runAllPossibleHands();
+        assertEquals(CardValue.SIX, hand.getHighestCard());
+        assertEquals(HandPriority.SUITE, hand.getHandPriority());
     }
     @Test
     void testIsRoyalFlush() {
@@ -370,11 +420,11 @@ class HandTest {
 
     @Test
     void testNextHighestCard_DeuxPaires() {
-        String input = "10Tr 10Ca 8Co 8Pi ACo";  // Two pairs: 10s and 8s
+        String input = "10Tr 10Ca 8Co 8Pi 7Co";  // Two pairs: 10s and 8s
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         handScanner.handScan(hand, 1);
 
-        hand.isDoublePaire();  //TODO: change isPaire to isDoublePaire when implemented
+        hand.isDoublePaire();
         assertEquals(CardValue.TEN, hand.getHighestCard());
 
         hand.nextHighestCard();
@@ -390,6 +440,8 @@ class HandTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         handScanner.handScan(hand, 1);
 
+
+        hand.runAllPossibleHands();
         hand.nextHighestCard();
         assertEquals(CardValue.NINE, hand.getHighestCard(), "Expected the highest card to be 9 after removing the 10");
 

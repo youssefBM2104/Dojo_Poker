@@ -32,9 +32,9 @@ public class Hand implements HandInterface {
     public void addCardToHand(Card card){
         this.cardList.add(card);
         updateHashMap(card);
-        if (cardList.size()==5){
-            runAllPossibleHands();
-        }
+//        if (cardList.size()==5){
+//            runAllPossibleHands();
+//        }
 
     }
 
@@ -166,6 +166,7 @@ public class Hand implements HandInterface {
         return false;
     }
 
+    //TODO find a better alternative to stop executing the moment we find the highest priority
     public void runAllPossibleHands(){
         for (Method method : HandInterface.class.getMethods()){
             try {
@@ -222,13 +223,15 @@ public class Hand implements HandInterface {
             }
         }
     }
-    public void triCardListe() {
+    private void triCardListe() {
         int lengthL = cardList.size();
         for (int i = 1; i < lengthL; i++) {
             Card cardToInsert = cardList.get(i);
             int j = i - 1;
 
+
             while (j >= 0 && cardList.get(j).supTo(cardToInsert)) {
+                cardList.set(j + 1, cardList.get(j));
                 j--;
             }
 
@@ -238,14 +241,28 @@ public class Hand implements HandInterface {
 
 
 
-    private boolean isSuite(Hand hand) {
-        hand.triCardListe();
+
+
+    @Override
+    public boolean isSuite() {
+
+
+        this.triCardListe();
+        if(this.hashMapFromHand.size() != 5) {
+            return false;
+        }
 
         for (int i=0;i<cardList.size()-1;i++) {
             if (cardList.get(i+1).getCardValue().ordinal()!=cardList.get(i).getCardValue().ordinal()+1){
                 return false;
             }
         }
+
+        if (handPriority.ordinal()<HandPriority.SUITE.ordinal()){
+            handPriority = HandPriority.SUITE;
+            highestCard = cardList.getLast().getCardValue();
+        }
+
         return true;
     }
 }

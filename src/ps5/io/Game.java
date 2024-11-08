@@ -39,6 +39,8 @@ public class Game {
             ok2 = handScanner.handScan(hand2, 2);
         } while (!ok2);
 
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
 
         //TODO: add how the hand won on the output
         HandId winner = gameEngine.whoWon(hand1,hand2);
