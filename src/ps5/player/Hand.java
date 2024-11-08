@@ -135,10 +135,12 @@ public class Hand implements HandInterface {
         }
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
 
-            if (entry.getValue() == 2 && entry.getKey().ordinal()>this.handPriority.ordinal()) {
+            if (entry.getValue() == 2 && entry.getKey().ordinal()>this.highestCard.ordinal()) {
                     highestCard = entry.getKey();
+
             }
         }
+        handPriority = HandPriority.DEUX_PAIRES;
         return true;
     }
 
@@ -190,7 +192,7 @@ public class Hand implements HandInterface {
                 break;
             case DEUX_PAIRES:
                 removePairFromHashMap(highestCard);
-                if (hashMapFromHand.size()!=2){
+                if (hashMapFromHand.size()==2){
                     setHighestCardFromNextPair();
                 }
                 else {
@@ -219,7 +221,7 @@ public class Hand implements HandInterface {
     public void setHighestCardFromNextPair(){
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue() == 2) {
-                highestCard = maxCardValueFromList();
+                highestCard = entry.getKey();
             }
         }
     }

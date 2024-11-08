@@ -52,18 +52,18 @@ class GameEngineTest {
         assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
     }
     //TODO: uncomment tests when all methods are implemented plus check for more scenarios if needed
-//    @Test
-//    void testWhoWon_TwoPairs() {
-//        String input1 = "10Tr 10Ca 8Co 8Pi 2Ca";
-//        System.setIn(new ByteArrayInputStream(input1.getBytes()));
-//        handScanner.handScan(hand1, 1);
-//
-//        String input2 = "9Co 9Pi 7Tr 7Ca 3Pi";
-//        System.setIn(new ByteArrayInputStream(input2.getBytes()));
-//        handScanner.handScan(hand2, 2);
-//
-//        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
-//    }
+    @Test
+    void testWhoWon_TwoPairs() {
+        String input1 = "10Tr 10Ca 8Co 8Pi 2Ca";
+        System.setIn(new ByteArrayInputStream(input1.getBytes()));
+        handScanner.handScan(hand1, 1);
+
+        String input2 = "9Co 9Pi 7Tr 7Ca 3Pi";
+        System.setIn(new ByteArrayInputStream(input2.getBytes()));
+        handScanner.handScan(hand2, 2);
+
+        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
+    }
 
     @Test
     void testWhoWon_FullHouseVsCouleur() {
@@ -105,19 +105,19 @@ class GameEngineTest {
         assertEquals(HandId.HAND_2, gameEngine.whoWon(hand1, hand2));
     }
 
-//    @Test
-//    void testWhoWon_TwoPairs_SameHighPairDifferentLowPair() {
-//        String input1 = "RTr RCa 8Co 8Pi 2Co";
-//        System.setIn(new ByteArrayInputStream(input1.getBytes()));
-//        handScanner.handScan(hand1, 1);
-//
-//        Hand hand2 = new Hand();
-//        String input2 = "RPi RCo 7Tr 7Ca 3Pi";
-//        System.setIn(new ByteArrayInputStream(input2.getBytes()));
-//        handScanner.handScan(hand2, 2);
-//
-//        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
-//    }
+    @Test
+    void testWhoWon_TwoPairs_SameHighPairDifferentLowPair() {
+        String input1 = "RTr RCa 8Co 8Pi 2Co";
+        System.setIn(new ByteArrayInputStream(input1.getBytes()));
+        handScanner.handScan(hand1, 1);
+
+        Hand hand2 = new Hand();
+        String input2 = "RPi RCo 7Tr 7Ca 3Pi";
+        System.setIn(new ByteArrayInputStream(input2.getBytes()));
+        handScanner.handScan(hand2, 2);
+
+        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
+    }
 
     @Test
     void testWhoWon_Couleur_SameCouleurDifferentHighestCard() {
@@ -158,18 +158,21 @@ class GameEngineTest {
 //        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
 //    }
 
-//    @Test
-//    void testWhoWon_TwoPairs_SamePairsDifferentRemainingCard() {
-//        String input1 = "8Tr 8Ca 4Co 4Pi 2Co";
-//        System.setIn(new ByteArrayInputStream(input1.getBytes()));
-//        handScanner.handScan(hand1, 1);
-//
-//        String input2 = "8Pi 8Co 4Tr 4Ca 3Pi";
-//        System.setIn(new ByteArrayInputStream(input2.getBytes()));
-//        handScanner.handScan(hand2, 2);
-//
-//        assertEquals(HandId.HAND_1, gameEngine.whoWon(hand1, hand2));
-//    }
+    @Test
+    void testWhoWon_TwoPairs_SamePairsDifferentRemainingCard() {
+        String input1 = "8Tr 8Ca 4Co 4Pi 2Co";
+        System.setIn(new ByteArrayInputStream(input1.getBytes()));
+        handScanner.handScan(hand1, 1);
+
+        String input2 = "8Pi 8Co 4Tr 4Ca 3Pi";
+        System.setIn(new ByteArrayInputStream(input2.getBytes()));
+        handScanner.handScan(hand2, 2);
+
+        hand1.runAllPossibleHands();
+        hand2.runAllPossibleHands();
+
+        assertEquals(HandId.HAND_2, gameEngine.whoWon(hand1, hand2));
+    }
 
     @Test
     void testWhoWon_Carre_SameFourDifferentKicker() {
