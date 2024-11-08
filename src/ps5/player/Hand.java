@@ -141,8 +141,8 @@ public class Hand implements HandInterface {
             if (entry.getValue() == n) {
                 if (handPriority.ordinal()>this.handPriority.ordinal()){
                     this.handPriority = handPriority;
+                    highestCard = entry.getKey();
                 }
-                highestCard = maxCardValueFromList();
                 return true;
             }
         }
