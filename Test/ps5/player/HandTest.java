@@ -210,6 +210,39 @@ class HandTest {
     }
 
     @Test
+    void testIsQuinteFlush(){
+        String input = "2Tr 3Ca 4Co 5Pi 6Pi";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertFalse(hand.isQuinteFlush());
+        assertNotEquals(HandPriority.FLUSH, hand.getHandPriority());
+
+        setUp();
+
+        input = "2Ca 3Ca 4Ca 5Ca 6Ca";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isQuinteFlush());
+        assertEquals(HandPriority.FLUSH, hand.getHandPriority());
+        assertEquals(CardValue.SIX,hand.getHighestCard());
+
+        setUp();
+
+        input = "9Co 10Co VCo DCo RCo";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        handScanner.handScan(hand, 1);
+
+        assertTrue(hand.isQuinteFlush());
+        assertEquals(HandPriority.FLUSH, hand.getHandPriority());
+        assertEquals(CardValue.R,hand.getHighestCard());
+    }
+
+    @Test
     void testRunAllPossibleHands1(){
         //Verification d'une paire
         String paire = "10Tr 8Ca 9Co 10Pi 7Pi";
@@ -310,6 +343,19 @@ class HandTest {
         hand.runAllPossibleHands();
         assertEquals(CardValue.SIX, hand.getHighestCard());
         assertEquals(HandPriority.SUITE, hand.getHandPriority());
+    }
+    @Test
+    void testRunAllPossibleHands10(){
+        //verification d'une suite
+        String flush = "2Ca 3Ca 4Ca 5Ca 6Ca";
+        InputStream in = new ByteArrayInputStream(flush.getBytes());
+        System.setIn(in);
+
+        handScanner.handScan(hand, 1);
+
+        hand.runAllPossibleHands();
+        assertEquals(CardValue.SIX, hand.getHighestCard());
+        assertEquals(HandPriority.FLUSH, hand.getHandPriority());
     }
     @Test
     void testIsRoyalFlush() {

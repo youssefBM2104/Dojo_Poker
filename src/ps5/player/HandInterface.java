@@ -8,4 +8,5 @@ public interface HandInterface {
     boolean isCarre();
     boolean isRoyalFlush();
     boolean isSuite();
+    boolean isQuinteFlush();
 }

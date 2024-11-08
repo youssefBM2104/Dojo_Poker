@@ -248,4 +248,19 @@ public class Hand implements HandInterface {
 
         return true;
     }
+
+    @Override
+    public boolean isQuinteFlush(){
+        if(isSuite() && isFullColor()){
+            if (handPriority.ordinal()<HandPriority.FLUSH.ordinal()){
+                handPriority = HandPriority.FLUSH;
+                highestCard = cardList.getLast().getCardValue();
+            }
+            return true;
+        }
+        return false;
+    }
+
 }
+
+
