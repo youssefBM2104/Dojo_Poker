@@ -2,6 +2,8 @@ package ps5.player;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import ps5.io.HandScanner;
 import ps5.player.enums.CardValue;
 import ps5.player.enums.HandPriority;
@@ -242,134 +244,30 @@ class HandTest {
         assertEquals(CardValue.R,hand.getHighestCard());
     }
 
-    @Test
-    void testRunAllPossibleHands1(){
-        //Verification d'une paire
-        String paire = "10Tr 8Ca 9Co 10Pi 7Pi";
-        InputStream in = new ByteArrayInputStream(paire.getBytes());
-        System.setIn(in);
-
-        handScanner.handScan(hand, 1);
-
-        hand.runAllPossibleHands();
-        assertEquals(HandPriority.PAIRE, hand.getHandPriority());
-    }
-
-    @Test
-    void testRunAllPossibleHands2(){
-        //Verification d'une fullHouse
-        String fullHouse = "10Tr 7Ca 10Co 10Pi 7Pi";
-        InputStream in = new ByteArrayInputStream(fullHouse.getBytes());
-        System.setIn(in);
-
-        handScanner.handScan(hand, 1);
-        hand.runAllPossibleHands();
-
-        assertEquals(HandPriority.FULL_HOUSE, hand.getHandPriority());
-    }
-
-    @Test
-    void testRunAllPossibleHands3(){
-        //Verification d'un brelan
-        String brelan = "10Tr 8Ca 10Co 10Pi 7Pi";
-        InputStream in = new ByteArrayInputStream(brelan.getBytes());
-        System.setIn(in);
-
-        handScanner.handScan(hand, 1);
-
-        hand.runAllPossibleHands();
-        assertEquals(HandPriority.BRELAN, hand.getHandPriority());
-    }
-
-    @Test
-    void testRunAllPossibleHands4(){
-        //Verification d'une fullColor
-        String fullColor = "10Tr 5Tr 9Tr 3Tr 7Tr";
-        InputStream in = new ByteArrayInputStream(fullColor.getBytes());
-        System.setIn(in);
-
-        handScanner.handScan(hand, 1);
-
-        hand.runAllPossibleHands();
-        assertEquals(HandPriority.COULEUR, hand.getHandPriority());
-    }
-
-    @Test
-    void testRunAllPossibleHands5(){
-        //Verification d'une plus haute carte
-        String handString = "10Tr 5Ca 9Co 3Tr 7Tr";
+    @ParameterizedTest
+    @CsvSource({
+            "'10Tr 8Ca 9Co 10Pi 7Pi', PAIRE, TEN",
+            "'10Tr 7Ca 10Co 10Pi 7Pi', FULL_HOUSE, TEN",
+            "'10Tr 8Ca 10Co 10Pi 7Pi', BRELAN, TEN",
+            "'10Tr 5Tr 9Tr 3Tr 7Tr', COULEUR, TEN",
+            "'10Tr 5Ca 9Co 3Tr 7Tr', MAX_CARD_IN_HAND, TEN",
+            "'10Tr VTr DTr RTr ATr', ROYALE_FLUSH, A",
+            "'10Tr 10Ca 10Co 10Pi 2Co', CARRE, TEN",
+            "'2Tr 3Ca 4Co 5Pi 6Pi', SUITE, SIX",
+            "'8Tr 8Ca 4Co 4Pi 10Pi', DOUBLE_PAIRE, EIGHT",
+            "'2Ca 3Ca 4Ca 5Ca 6Ca', FLUSH, SIX"
+    })
+    void testRunAllPossibleHands(String handString, HandPriority expectedPriority, CardValue expectedHighestCard) {
         InputStream in = new ByteArrayInputStream(handString.getBytes());
         System.setIn(in);
 
         handScanner.handScan(hand, 1);
         hand.runAllPossibleHands();
-        assertEquals(CardValue.TEN, hand.getHighestCard());
-        assertEquals(HandPriority.MAX_CARD_IN_HAND, hand.getHandPriority());
-    }
-    @Test
-    void testRunAllPossibleHands6(){
-        String royalFlush = "10Tr VTr DTr RTr ATr";
-        InputStream in = new ByteArrayInputStream(royalFlush.getBytes());
-        System.setIn(in);
 
-        handScanner.handScan(hand, 1);
-
-        hand.runAllPossibleHands();
-        assertEquals(CardValue.A, hand.getHighestCard());
-        assertEquals(HandPriority.ROYALE_FLUSH, hand.getHandPriority());
-    }
-
-    @Test
-    void testRunAllPossibleHands7(){
-        String carre = "10Tr 10Ca 10Co 10Pi 2Co";
-        InputStream in = new ByteArrayInputStream(carre.getBytes());
-        System.setIn(in);
-
-        handScanner.handScan(hand, 1);
-
-        hand.runAllPossibleHands();
-        assertEquals(CardValue.TEN, hand.getHighestCard());
-        assertEquals(HandPriority.CARRE, hand.getHandPriority());
-    }
-    @Test
-    void testRunAllPossibleHands8(){
-        //verification d'une suite
-        String suite = "2Tr 3Ca 4Co 5Pi 6Pi";
-        InputStream in = new ByteArrayInputStream(suite.getBytes());
-        System.setIn(in);
-
-        handScanner.handScan(hand, 1);
-
-        hand.runAllPossibleHands();
-        assertEquals(CardValue.SIX, hand.getHighestCard());
-        assertEquals(HandPriority.SUITE, hand.getHandPriority());
-    }
-    @Test
-    void testRunAllPossibleHands9(){
-        //verification d'une double paire
-        String doubleP = "8Tr 8Ca 4Co 4Pi 10Pi";
-        InputStream in = new ByteArrayInputStream(doubleP.getBytes());
-        System.setIn(in);
-
-        handScanner.handScan(hand, 1);
-
-        hand.runAllPossibleHands();
-        assertEquals(CardValue.EIGHT, hand.getHighestCard());
-        assertEquals(HandPriority.DOUBLE_PAIRE, hand.getHandPriority());
-    }
-
-    @Test
-    void testRunAllPossibleHands10(){
-        //verification d'une suite
-        String flush = "2Ca 3Ca 4Ca 5Ca 6Ca";
-        InputStream in = new ByteArrayInputStream(flush.getBytes());
-        System.setIn(in);
-
-        handScanner.handScan(hand, 1);
-
-        hand.runAllPossibleHands();
-        assertEquals(CardValue.SIX, hand.getHighestCard());
-        assertEquals(HandPriority.FLUSH, hand.getHandPriority());
+        assertEquals(expectedPriority, hand.getHandPriority(), "Unexpected hand priority for hand: " + handString);
+        if (expectedHighestCard != null) {
+            assertEquals(expectedHighestCard, hand.getHighestCard(), "Unexpected highest card for hand: " + handString);
+        }
     }
 
     @Test
