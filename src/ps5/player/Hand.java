@@ -205,7 +205,7 @@ public class Hand implements HandInterface {
             }
         }
     }
-    public void triCardListe() {
+    private void triCardListe() {
         int lengthL = cardList.size();
         for (int i = 1; i < lengthL; i++) {
             Card cardToInsert = cardList.get(i);
@@ -221,14 +221,26 @@ public class Hand implements HandInterface {
 
 
 
-    private boolean isSuite(Hand hand) {
-        hand.triCardListe();
+    @Override
+    public boolean isSuite() {
+
+        this.triCardListe();
+
+        if(this.hashMapFromHand.size() != 5) {
+            return false;
+        }
 
         for (int i=0;i<cardList.size()-1;i++) {
             if (cardList.get(i+1).getCardValue().ordinal()!=cardList.get(i).getCardValue().ordinal()+1){
                 return false;
             }
         }
+
+        if (handPriority.ordinal()<HandPriority.SUITE.ordinal()){
+            handPriority = HandPriority.SUITE;
+            highestCard = cardList.getLast().getCardValue();
+        }
+
         return true;
     }
 }
