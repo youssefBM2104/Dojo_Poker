@@ -8,8 +8,7 @@ import ps5.player.Hand;
 import ps5.player.enums.HandId;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,7 +64,6 @@ class OutputHandlerTest {
             "'RTr RCa RPi VTr VCa', '10Tr 10Ca 10Co 8Pi 8Ca', 'Main 1 gagne avec un full de Rs et Vs'"
     })
     void testShowWinner(String input1, String input2, String expectedOutput) {
-        // Set input and scan for Player 1's hand
         System.setIn(new ByteArrayInputStream(input1.getBytes()));
         handScanner.handScan(hand1, 1);
 

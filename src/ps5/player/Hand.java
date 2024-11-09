@@ -3,11 +3,10 @@ package ps5.player;
 import ps5.player.enums.CardValue;
 import ps5.player.enums.HandPriority;
 
-import java.lang.reflect.Method;
 import java.util.*;
 
 public class Hand   {
-    private List<Card>cardList;
+    private List<Card> cardList;
     private HandPriority handPriority;
     private CardValue highestCard;
     Map<CardValue,Integer> hashMapFromHand;
@@ -25,16 +24,12 @@ public class Hand   {
         return cardList;
     }
 
-    public void setCardList(List<Card> cardList) {
-        this.cardList = cardList;
-    }
+
 
     public void addCardToHand(Card card){
         this.cardList.add(card);
         updateHashMap(card);
-//        if (cardList.size()==5){
-//            runAllPossibleHands();
-//        }
+
 
     }
 

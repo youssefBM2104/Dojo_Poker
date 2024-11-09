@@ -5,8 +5,6 @@ import ps5.player.Hand;
 import ps5.player.enums.CardColor;
 import ps5.player.enums.CardValue;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class HandScanner {

@@ -94,5 +94,6 @@ class HandScannerTest {
 
         assertEquals(0, hand.getCardList().size());
     }
+    //TODO add more tests to crash handscan
 
 }
