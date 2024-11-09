@@ -269,7 +269,23 @@ public class Hand   {
         }
         return false;
     }
+    public CardValue getTripleValue() {
+        for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
+            if (entry.getValue() == 3) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
 
+    public CardValue getPairValue() {
+        for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
+            if (entry.getValue() == 2) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
 }
 
 

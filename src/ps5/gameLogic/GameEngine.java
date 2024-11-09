@@ -9,7 +9,7 @@ import ps5.player.enums.HandPriority;
 public class GameEngine {
 
 
-    public HandId whoWon(Hand hand1, Hand hand2) {
+    public HandId whoWon(Hand hand1, Hand hand2, boolean[] flag) {
 
 
         // HANDS ARENT EQUAL
@@ -42,7 +42,8 @@ public class GameEngine {
         hand1.nextHighestCard();
         hand2.nextHighestCard();
 
-        return whoWon(hand1,hand2);
+        flag[0] = false;
+        return whoWon(hand1,hand2,flag);
     }
 
  }

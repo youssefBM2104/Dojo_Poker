@@ -13,5 +13,23 @@ public enum CardValue {
     V,
     D,
     R,
-    A
+    A;
+    @Override
+    public String toString() {
+        return switch (this) {
+            case TWO -> "2";
+            case THREE -> "3";
+            case FOUR -> "4";
+            case FIVE -> "5";
+            case SIX -> "6";
+            case SEVEN -> "7";
+            case EIGHT -> "8";
+            case NINE -> "9";
+            case TEN -> "10";
+            case V -> "V";
+            case D -> "D";
+            case R -> "R";
+            case A -> "A";
+        };
+    }
 }
