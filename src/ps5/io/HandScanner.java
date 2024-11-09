@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class HandScanner {
 
-    //TODO exceptions baby
     public  boolean handScan(Hand hand, int handNumber) {
         // Create a scanner to read from standard input
         Scanner scanner = new Scanner(System.in);
@@ -32,18 +31,23 @@ public class HandScanner {
             return false;
         }
         for (String cardString : cardsString) {
-            Card card = getCardFromString(cardString);
-            if (hand.getCardList().contains(card)){
-                System.out.println("Please provide exactly 5 distinct cards!");
+            try{
+                Card card = getCardFromString(cardString);
+                if (hand.getCardList().contains(card)){
+                    System.out.println("Please provide exactly 5 distinct cards!");
+                    return false;
+                }
+                hand.addCardToHand(card);
+            }catch (IllegalArgumentException e){
+                System.out.println("Please provide exactly 5 valid cards!");
                 return false;
             }
-            hand.addCardToHand(card);
         }
 
         return true;
     }
 
-    public Card getCardFromString(String cardString) {
+    public Card getCardFromString(String cardString) throws IllegalArgumentException{
         CardValue cardValue;
         CardColor cardColor;
 
@@ -54,7 +58,7 @@ public class HandScanner {
                 case "Tr" -> CardColor.TR;
                 case "Co" -> CardColor.CO;
                 case "Ca" -> CardColor.CA;
-                default -> throw new IllegalArgumentException("Color invalid");
+                default -> throw new IllegalArgumentException();
             };
         } else {
             cardValue = switch (cardString.charAt(0)) {
@@ -70,7 +74,7 @@ public class HandScanner {
                 case 'D' -> CardValue.D;
                 case 'R' -> CardValue.R;
                 case 'A' -> CardValue.A;
-                default -> throw new IllegalArgumentException("Card value invalid");
+                default -> throw new IllegalArgumentException();
             };
 
             cardColor = switch (cardString.substring(1)) {
@@ -78,7 +82,7 @@ public class HandScanner {
                 case "Tr" -> CardColor.TR;
                 case "Co" -> CardColor.CO;
                 case "Ca" -> CardColor.CA;
-                default -> throw new IllegalArgumentException("Color invalid");
+                default -> throw new IllegalArgumentException();
             };
         }
 
