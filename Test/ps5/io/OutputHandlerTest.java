@@ -35,6 +35,10 @@ class OutputHandlerTest {
 
             "'VTr VCo 7Pi 4Ca 2Co', 'RCa 9Co 6Tr 3Pi 5Tr', 'Main 1 gagne avec une paire de Vs'",
 
+            " 'RCa RCo 6Tr 3Pi 5Tr', 'VTr DTr 6Tr 4Tr 2Tr','Main 2 gagne avec une couleur de TR et la carte la plus haute D'",
+
+            "'10Tr 10Ca 10Co 8Pi 8Ca', '10Tr 10Ca 10Co 8Pi 8Ca', 'Égalité'",
+
             "'10Tr 10Ca RCo 4Pi 3Ca', '10Pi 10Co DTr ACa 2Tr', 'Main 2 gagne avec la plus forte carte A'",
 
             "'ATr RTr DTr VTr 10Tr', 'APi RPi DPi VPi 10Pi',  'Égalité'",
@@ -55,13 +59,18 @@ class OutputHandlerTest {
 
             "'10Tr 10Ca 10Co 5Pi 3Co', '9Tr 9Ca 9Co 4Pi 2Co', 'Main 1 gagne avec un brelan de 10s'",
 
-            "'10Tr 10Ca 10Co 5Pi 4Co', '9Tr 9Ca 9Co 4Pi ACa', 'Main 1 gagne avec un brelan de 10s'",
+            "'10Tr 10Ca 10Co 5Pi 3Co', '10Tr 10Ca 10Co 5Pi 4Co', 'Main 2 gagne avec la plus forte carte 4'",
+
+            "'5Tr 6Tr 7Tr 8Tr 9Co', '9Tr 9Ca 9Co 4Pi ACa', 'Main 1 gagne avec une suite se terminant par 9'",
 
             "'5Tr 6Tr 7Tr 8Tr 9Tr', '2Pi 3Pi 4Pi 5Pi 6Pi',  'Main 1 gagne avec une quinte flush se terminant par 9'",
 
             "'RTr RCa RCo 2Pi 2Ca', 'RCa RPi RTr 8Co 8Ca','Main 2 gagne avec la plus forte carte 8'",
 
-            "'RTr RCa RPi VTr VCa', '10Tr 10Ca 10Co 8Pi 8Ca', 'Main 1 gagne avec un full de Rs et Vs'"
+            "'RTr RCa RPi VTr VCa', '10Tr 10Ca 10Co 8Pi 8Ca', 'Main 1 gagne avec un full de Rs et Vs'",
+
+            "'RTr RCa APi VTr VCa', '10Tr 10Ca ACo 8Pi 8Ca', 'Main 1 gagne avec deux paires, la plus haute de R'",
+            "'ATr RTr 10Tr VTr DTr','5Tr 6Tr 7Tr 8Tr 9Tr','Main 1 gagne avec une quinte flush royale'"
     })
     void testShowWinner(String input1, String input2, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input1.getBytes()));
