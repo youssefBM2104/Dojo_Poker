@@ -14,6 +14,7 @@ public enum CardValue {
     D,
     R,
     A;
+
     @Override
     public String toString() {
         return switch (this) {

@@ -24,24 +24,24 @@ public class Card {
         return cardValue;
     }
 
-    public boolean supTo(Card card){
+    public boolean supTo(Card card) {
         return this.cardValue.ordinal() > card.cardValue.ordinal();
     }
 
-    public boolean isSameValue(Card card){
+    public boolean isSameValue(Card card) {
         return this.cardValue.ordinal() == card.cardValue.ordinal();
     }
 
-    public boolean isSameColor(Card card){
+    public boolean isSameColor(Card card) {
         return this.getCardColor().equals(card.getCardColor());
     }
 
     @Override
-    public boolean equals(Object o){
-        if (this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if(o == null || getClass()!=o.getClass()){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Card card = (Card) o;
@@ -49,8 +49,8 @@ public class Card {
     }
 
     @Override
-    public int hashCode(){
-        return Objects.hash(cardColor,cardValue);
+    public int hashCode() {
+        return Objects.hash(cardColor, cardValue);
     }
 
 }

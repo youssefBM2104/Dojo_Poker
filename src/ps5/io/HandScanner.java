@@ -9,12 +9,12 @@ import java.util.Scanner;
 
 public class HandScanner {
 
-    public  boolean handScan(Hand hand, int handNumber) {
+    public boolean handScan(Hand hand, int handNumber) {
         // Create a scanner to read from standard input
         Scanner scanner = new Scanner(System.in);
 
         // Prompt the user to enter a line of text
-        System.out.print("Main "+ handNumber +": ");
+        System.out.print("Main " + handNumber + ": ");
         String line = scanner.nextLine();
 
         if (line.isEmpty()) {
@@ -24,19 +24,19 @@ public class HandScanner {
         // Split the line into words
         String[] cardsString = line.split("\\s+");  // Uses "\\s+" to split by one or more spaces
 
-        if (cardsString.length !=5){
+        if (cardsString.length != 5) {
             System.out.println("Please provide exactly 5 cards!");
             return false;
         }
         for (String cardString : cardsString) {
-            try{
+            try {
                 Card card = getCardFromString(cardString);
-                if (hand.getCardList().contains(card)){
+                if (hand.getCardList().contains(card)) {
                     System.out.println("Please provide exactly 5 distinct cards!");
                     return false;
                 }
                 hand.addCardToHand(card);
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println("Please provide exactly 5 valid cards!");
                 return false;
             }
@@ -45,7 +45,7 @@ public class HandScanner {
         return true;
     }
 
-    public Card getCardFromString(String cardString) throws IllegalArgumentException{
+    public Card getCardFromString(String cardString) throws IllegalArgumentException {
         CardValue cardValue;
         CardColor cardColor;
 

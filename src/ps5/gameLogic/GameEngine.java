@@ -15,26 +15,24 @@ public class GameEngine {
         // HANDS ARENT EQUAL
         if (hand1.getHandPriority().ordinal() > hand2.getHandPriority().ordinal()) {
             return HandId.HAND_1;
-        }
-        else if (hand1.getHandPriority().ordinal() < hand2.getHandPriority().ordinal()) {
+        } else if (hand1.getHandPriority().ordinal() < hand2.getHandPriority().ordinal()) {
             return HandId.HAND_2;
         }
         if (hand1.getHighestCard().ordinal() > hand2.getHighestCard().ordinal()) {
             return HandId.HAND_1;
-        }
-        else if (hand1.getHighestCard().ordinal() < hand2.getHighestCard().ordinal()) {
+        } else if (hand1.getHighestCard().ordinal() < hand2.getHighestCard().ordinal()) {
             return HandId.HAND_2;
         }
 
         // HANDS ARE EQUAL
-        if(hand1.getHandPriority() == HandPriority.ROYALE_FLUSH){
+        if (hand1.getHandPriority() == HandPriority.ROYALE_FLUSH) {
             return HandId.DEFAULT;
         }
 
-        if (hand1.getHandPriority() == HandPriority.FULL_HOUSE && hand1.getCardList().size() == 2){
+        if (hand1.getHandPriority() == HandPriority.FULL_HOUSE && hand1.getCardList().size() == 2) {
             return HandId.DEFAULT;
         }
-        if (hand1.getCardList().size() == 1){
+        if (hand1.getCardList().size() == 1) {
             return HandId.DEFAULT;
         }
 
@@ -43,7 +41,7 @@ public class GameEngine {
         hand2.nextHighestCard();
 
         flag[0] = false;
-        return whoWon(hand1,hand2,flag);
+        return whoWon(hand1, hand2, flag);
     }
 
- }
+}
