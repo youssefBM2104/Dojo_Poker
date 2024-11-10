@@ -133,8 +133,9 @@ public class Hand   {
         if (counter==2){ // j'ai trouvé 2 paires
             handPriority = HandPriority.DOUBLE_PAIRE;
             highestCard = temp;
+            return true;
         }
-        return true;
+        return false;
     }
 
 
