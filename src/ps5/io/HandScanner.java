@@ -49,7 +49,7 @@ public class HandScanner {
         CardValue cardValue;
         CardColor cardColor;
 
-        if (cardString.length() == 4) {
+        if (cardString.length() == 4 && cardString.contains("10")) {
             cardValue = CardValue.TEN; // Always TEN when length is 4
             cardColor = switch (cardString.substring(2)) {
                 case "Pi" -> CardColor.PI;
