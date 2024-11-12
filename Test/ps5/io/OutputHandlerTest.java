@@ -84,7 +84,7 @@ class OutputHandlerTest {
 
         boolean[] flagArr = {true};
 
-        HandId expectedWinner =gameEngine.whoWon(hand1, hand2, flagArr);
+        HandId expectedWinner = gameEngine.whoWon(hand1, hand2, flagArr);
         String result = outputHandler.showWinner(expectedWinner, hand1, hand2, flagArr);
 
         assertEquals(expectedOutput, result);

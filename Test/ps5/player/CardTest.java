@@ -9,7 +9,7 @@ class CardTest {
 
 
     @org.junit.jupiter.api.Test
-    void testComparaison(){
+    void testComparaison() {
         Card card1 = new Card(CardColor.TR, CardValue.R);
         Card card2 = new Card(CardColor.TR, CardValue.SEVEN);
         Card card3 = new Card(CardColor.TR, CardValue.A);
@@ -17,6 +17,8 @@ class CardTest {
 
         assertNotEquals(card1, card4);
         assertTrue(card1.isSameValue(card4));
+        assertTrue(card1.isSameColor(card2));
+        assertFalse(card1.isSameColor(card4));
         assertTrue(card3.supTo(card4));
         assertFalse(card1.supTo(card3));
         assertFalse(card2.supTo(card1));
@@ -24,7 +26,6 @@ class CardTest {
         assertFalse(card3.supTo(card3));
 
     }
-
 
 
 }

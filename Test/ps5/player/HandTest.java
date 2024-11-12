@@ -17,6 +17,7 @@ class HandTest {
 
     private HandScanner handScanner;
     private Hand hand;
+
     @BeforeEach
     void setUp() {
         handScanner = new HandScanner();
@@ -64,9 +65,8 @@ class HandTest {
     }
 
 
-
     @Test
-    void testIsBrelan(){
+    void testIsBrelan() {
         String input = "10Tr 10Ca 7Co 10Pi 2Co";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -74,7 +74,7 @@ class HandTest {
 
         assertTrue(hand.isBrelan());
         assertEquals(HandPriority.BRELAN, hand.getHandPriority());
-        assertEquals(CardValue.TEN,hand.getHighestCard());
+        assertEquals(CardValue.TEN, hand.getHighestCard());
 
 
         setUp();
@@ -86,8 +86,6 @@ class HandTest {
 
         assertFalse(hand.isBrelan());
         assertNotEquals(HandPriority.BRELAN, hand.getHandPriority());
-
-
 
 
     }
@@ -111,7 +109,7 @@ class HandTest {
     }
 
     @Test
-    void testIsPaire(){
+    void testIsPaire() {
         String input = "10Tr 10Ca 7Co 10Pi 2Co";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -130,7 +128,7 @@ class HandTest {
 
         assertTrue(hand.isPaire());
         assertEquals(HandPriority.PAIRE, hand.getHandPriority());
-        assertEquals(CardValue.TEN,hand.getHighestCard());
+        assertEquals(CardValue.TEN, hand.getHighestCard());
 
 
     }
@@ -144,7 +142,7 @@ class HandTest {
 
         assertTrue(hand.isFullHouse());
         assertEquals(HandPriority.FULL_HOUSE, hand.getHandPriority());
-        assertEquals(CardValue.TEN,hand.getHighestCard());
+        assertEquals(CardValue.TEN, hand.getHighestCard());
 
         setUp();
 
@@ -179,8 +177,9 @@ class HandTest {
 
 
     }
+
     @Test
-    void testIsSuite(){
+    void testIsSuite() {
         String input = "2Tr 3Ca 4Co 5Pi 6Pi";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -188,7 +187,7 @@ class HandTest {
 
         assertTrue(hand.isSuite());
         assertEquals(HandPriority.SUITE, hand.getHandPriority());
-        assertEquals(CardValue.SIX,hand.getHighestCard());
+        assertEquals(CardValue.SIX, hand.getHighestCard());
 
         setUp();
 
@@ -212,7 +211,7 @@ class HandTest {
     }
 
     @Test
-    void testIsQuinteFlush(){
+    void testIsQuinteFlush() {
         String input = "2Tr 3Ca 4Co 5Pi 6Pi";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -230,7 +229,7 @@ class HandTest {
 
         assertTrue(hand.isQuinteFlush());
         assertEquals(HandPriority.FLUSH, hand.getHandPriority());
-        assertEquals(CardValue.SIX,hand.getHighestCard());
+        assertEquals(CardValue.SIX, hand.getHighestCard());
 
         setUp();
 
@@ -241,7 +240,7 @@ class HandTest {
 
         assertTrue(hand.isQuinteFlush());
         assertEquals(HandPriority.FLUSH, hand.getHandPriority());
-        assertEquals(CardValue.R,hand.getHighestCard());
+        assertEquals(CardValue.R, hand.getHighestCard());
     }
 
     @ParameterizedTest
@@ -318,7 +317,7 @@ class HandTest {
     }
 
     @Test
-    void testIsCarre(){
+    void testIsCarre() {
         String input = "10Tr 10Ca 10Co 10Pi 2Co";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         handScanner.handScan(hand, 1);
@@ -425,7 +424,7 @@ class HandTest {
         handScanner.handScan(hand, 1);
 
         hand.removePairFromHashMap(CardValue.TEN);
-        assertFalse(hand.hashMapFromHand.containsKey(CardValue.TEN), "Expected the pair of 10s to be removed from the map");
+        assertFalse(hand.getHashMapFromHand().containsKey(CardValue.TEN), "Expected the pair of 10s to be removed from the map");
     }
 
     @Test

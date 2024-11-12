@@ -76,9 +76,9 @@ class GameEngineTest {
         hand1.runAllPossibleHands();
         hand2.runAllPossibleHands();
 
-        boolean[] flag={true};
+        boolean[] flag = {true};
         // Assert the expected winner
-        assertEquals(expectedWinner, gameEngine.whoWon(hand1, hand2 ,flag));
+        assertEquals(expectedWinner, gameEngine.whoWon(hand1, hand2, flag));
     }
 
 }

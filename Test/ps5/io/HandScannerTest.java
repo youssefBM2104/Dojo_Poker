@@ -22,7 +22,7 @@ class HandScannerTest {
     }
 
     @Test
-    void getCardFromString() {
+    void testGetCardFromString() {
         Card card = handScanner.getCardFromString("10Tr");
         assertNotNull(card);
         assertEquals(CardColor.TR, card.getCardColor());
@@ -80,7 +80,7 @@ class HandScannerTest {
         in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        assertFalse(handScanner.handScan( new Hand(),1));
+        assertFalse(handScanner.handScan(new Hand(), 1));
     }
 
     @Test
