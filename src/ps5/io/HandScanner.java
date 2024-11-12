@@ -18,7 +18,7 @@ public class HandScanner {
         String line = scanner.nextLine();
 
         if (line.isEmpty()) {
-            System.out.println("No cards entered. Please provide at least one card.");
+            System.out.println("No cards entered.");
             return false;
         }
         // Split the line into words

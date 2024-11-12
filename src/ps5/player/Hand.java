@@ -9,7 +9,7 @@ public class Hand {
     private List<Card> cardList;
     private HandPriority handPriority;
     private CardValue highestCard;
-    Map<CardValue, Integer> hashMapFromHand;
+    private Map<CardValue, Integer> hashMapFromHand;
 
     public Hand() {
         this.cardList = new ArrayList<>();
@@ -24,6 +24,9 @@ public class Hand {
         return cardList;
     }
 
+    public Map<CardValue, Integer> getHashMapFromHand() {
+        return hashMapFromHand;
+    }
 
     public void addCardToHand(Card card) {
         this.cardList.add(card);
