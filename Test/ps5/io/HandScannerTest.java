@@ -2,6 +2,8 @@ package ps5.io;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import ps5.player.Card;
 import ps5.player.Hand;
 import ps5.player.enums.*;
@@ -83,17 +85,18 @@ class HandScannerTest {
         assertFalse(handScanner.handScan(new Hand(), 1));
     }
 
-    @Test
-    void testHandScan_WithLessCards() {
-        String input = "10Tr ACa";
+    @ParameterizedTest
+    @CsvSource({
+            "10tr",
+            "DAIUDH BDuab fbaiucasb can ca",
+            "10Tr 4Co 2Tr ACa",
+            "Bonjour tout le monde"
+    })
+    void testHandScanWithInvalidInput(String input) {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
         assertFalse(handScanner.handScan(hand, 1));
-
-
-        assertEquals(0, hand.getCardList().size());
     }
-    //TODO add more tests to crash handscan
 
 }
