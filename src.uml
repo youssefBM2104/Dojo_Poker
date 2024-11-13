@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement>/home/youssef/polytech/semestre5/ps5/Dojo_Poker/src</OriginalElement>
+  <OriginalElement />
   <nodes>
-    <node x="251.95214326223652" y="-354.6159080650053">ps5.player.Card</node>
-    <node x="249.5731159133291" y="-67.76106666048253">ps5.io.HandScanner</node>
-    <node x="-230.06205127260284" y="-354.6159080650053">ps5.player.Hand</node>
-    <node x="61.271434388977" y="-127.84196475512908">ps5.gameRunner.Game</node>
-    <node x="-184.27331882010756" y="-83.59323942643894">ps5.gameLogic.GameEngine</node>
     <node x="-152.69837628819533" y="49.22393813221828">ps5.io.OutputHandler</node>
+    <node x="-184.27331882010756" y="-83.59323942643894">ps5.gameLogic.GameEngine</node>
+    <node x="249.5731159133291" y="-67.76106666048253">ps5.io.HandScanner</node>
+    <node x="265.9521432622365" y="-354.6159080650053">ps5.player.Card</node>
+    <node x="61.271434388977" y="-127.84196475512908">ps5.gameRunner.Game</node>
+    <node x="-233.06205127260284" y="-354.6159080650053">ps5.player.Hand</node>
   </nodes>
   <notes />
   <edges>
@@ -17,32 +17,38 @@
       <point x="120.271434388977" y="66.72393813221828" />
       <point x="101.0" y="0.0" />
     </edge>
-    <edge source="ps5.gameRunner.Game" target="ps5.player.Hand" relationship="CREATE">
-      <point x="0.0" y="-17.5" />
-      <point x="141.33348566157986" y="83.0" />
-    </edge>
     <edge source="ps5.gameRunner.Game" target="ps5.gameLogic.GameEngine" relationship="CREATE">
       <point x="-59.0" y="0.0" />
       <point x="-92.77331882010756" y="-110.34196475512908" />
       <point x="0.0" y="-17.5" />
     </edge>
+    <edge source="ps5.gameRunner.Game" target="ps5.player.Hand" relationship="CREATE">
+      <point x="0.0" y="-17.5" />
+      <point x="108.771434388977" y="-167.7289364100672" />
+      <point x="75.77143438897701" y="-167.7289364100672" />
+      <point x="141.33348566157986" y="83.0" />
+    </edge>
     <edge source="ps5.io.HandScanner" target="ps5.player.Card" relationship="CREATE">
       <point x="17.879027348907414" y="-17.5" />
+      <point x="344.4521432622365" y="-164.68848736274393" />
+      <point x="354.4521432622365" y="-164.68848736274393" />
       <point x="0.0" y="53.0" />
     </edge>
     <edge source="ps5.gameRunner.Game" target="ps5.io.HandScanner" relationship="CREATE">
       <point x="59.000000000000014" y="0.0" />
-      <point x="345.0731159133291" y="-110.34196475512908" />
+      <point x="305.0" y="-113.84196475512908" />
+      <point x="305.0" y="-123.84196475512908" />
+      <point x="326.5731159133291" y="-123.84196475512908" />
       <point x="0.0" y="-17.5" />
     </edge>
     <edge source="ps5.player.Hand" target="ps5.player.Card" relationship="TO_MANY">
       <point x="209.0" y="74.86233040993989" />
-      <point x="219.94504599481684" y="-196.75357765506544" />
-      <point x="219.94504599481684" y="-301.6159080650053" />
+      <point x="219.94504599481684" y="-212.25357765506544" />
+      <point x="219.94504599481684" y="-311.1159080650053" />
       <point x="-111.0" y="0.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Compact" zoom="1.0" showDependencies="true" x="188.5" y="-79.0" />
+  <settings layout="Hierarchic Compact" zoom="1.0" showDependencies="true" x="17.0" y="-116.5" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
