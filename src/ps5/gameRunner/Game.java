@@ -6,6 +6,9 @@ import ps5.io.OutputHandler;
 import ps5.player.Hand;
 import ps5.player.enums.HandId;
 
+/**
+ * The running game resides inside Game.main()
+ */
 public class Game {
     public static void main(String[] args) {
         HandScanner handScanner = new HandScanner();
