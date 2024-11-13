@@ -6,9 +6,13 @@ import ps5.player.enums.HandPriority;
 import java.util.*;
 
 public class Hand {
+    // List of cards in the hand
     private List<Card> cardList;
+    // Priority of the hand
     private HandPriority handPriority;
+    // Highest card in the hand
     private CardValue highestCard;
+    // Mapping of card values to their frequency in the hand
     private Map<CardValue, Integer> hashMapFromHand;
 
     /**
@@ -23,10 +27,16 @@ public class Hand {
 
     }
 
+    /**
+     * @return the list of cards in the hand
+     */
     public List<Card> getCardList() {
         return cardList;
     }
 
+    /**
+     * @return the map of card values and their frequencies in the hand
+     */
     public Map<CardValue, Integer> getHashMapFromHand() {
         return hashMapFromHand;
     }
@@ -42,10 +52,18 @@ public class Hand {
 
     }
 
+    /**
+     * Returns the highest card in the hand
+     * @return CardValue
+     */
     public CardValue getHighestCard() {
         return highestCard;
     }
 
+    /**
+     * Returns the current hand priority
+     * @return HandPriority
+     */
     public HandPriority getHandPriority() {
         return handPriority;
     }
@@ -68,7 +86,7 @@ public class Hand {
 
     /**
      * Checks if the hand contains a pair
-     * @return a boolean (true if paire or false if not)
+     * @return a boolean (true if pair or false if not)
      */
     public boolean isPaire() {
         return checkForNTuple(2, HandPriority.PAIRE);
@@ -181,7 +199,7 @@ public class Hand {
 
     /**
      * Updates the map of card values with the frequency of each card in the hand
-     * @param card
+     * @param card The card to be added to the hashmap
      */
     private void updateHashMap(Card card) {
         CardValue cardValue = card.getCardValue();
@@ -190,8 +208,8 @@ public class Hand {
 
     /**
      * Checks if the hand contains a specified number of identical cards
-     * @param n
-     * @param handPriority
+     * @param n The number of occurrences
+     * @param handPriority The handPriority to be applied to the hand
      * @return a boolean (true if in map or false if not)
      */
     private boolean checkForNTuple(int n, HandPriority handPriority) {
@@ -252,16 +270,16 @@ public class Hand {
     }
 
     /**
-     * @param cardValue
      * Removes a card from the list by its value
+     * @param cardValue the cardValue of the card to be removed from the list
      */
     public void removeCardFromList(CardValue cardValue) {
         cardList.removeIf(card -> card.getCardValue().equals(cardValue));
     }
 
     /**
-     * @param cardValue
      * Removes a specified pair from the map of card values
+     * @param cardValue  the cardValue of the pair to be removed from the hashmap
      */
     public void removePairFromHashMap(CardValue cardValue) {
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
