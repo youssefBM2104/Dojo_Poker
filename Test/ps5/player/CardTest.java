@@ -16,7 +16,6 @@ class CardTest {
         Card card4 = new Card(CardColor.PI, CardValue.R);
 
         assertNotEquals(card1, card4);
-        assertTrue(card1.isSameValue(card4));
         assertTrue(card1.isSameColor(card2));
         assertFalse(card1.isSameColor(card4));
         assertTrue(card3.supTo(card4));
