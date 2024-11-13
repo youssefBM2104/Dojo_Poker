@@ -9,6 +9,13 @@ import ps5.player.enums.HandPriority;
 public class GameEngine {
 
 
+    /**
+     * Checks both hands given into arguments and gives who won
+     * @param hand1 first hand
+     * @param hand2 second hand
+     * @param flag boolean flag for the output
+     * @return HandId of the winning hand (DEFAULT if it's equality)
+     */
     public HandId whoWon(Hand hand1, Hand hand2, boolean[] flag) {
 
 

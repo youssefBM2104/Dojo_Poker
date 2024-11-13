@@ -9,6 +9,12 @@ import java.util.Scanner;
 
 public class HandScanner {
 
+    /**
+     * Generates a Hand from a given input
+     * @param hand the hand to be filled
+     * @param handNumber the number associated to the hand
+     * @return true if hand was successfully generated false otherwise
+     */
     public boolean handScan(Hand hand, int handNumber) {
         // Create a scanner to read from standard input
         Scanner scanner = new Scanner(System.in);
@@ -45,6 +51,12 @@ public class HandScanner {
         return true;
     }
 
+    /**
+     * Converts a String into a Card
+     * @param cardString card in String format
+     * @return the card converted from a String
+     * @throws IllegalArgumentException throws an exception if the String isn't a valid card
+     */
     public Card getCardFromString(String cardString) throws IllegalArgumentException {
         CardValue cardValue;
         CardColor cardColor;

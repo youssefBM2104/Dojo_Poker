@@ -4,6 +4,14 @@ import ps5.player.Hand;
 import ps5.player.enums.HandId;
 
 public class OutputHandler {
+    /**
+     * Builds a custom winning message depending on who won and how they won
+     * @param winner HandId of the corresponding winner
+     * @param hand1 The first hand
+     * @param hand2 The second hand
+     * @param flag Indicates if the winning hand won because of it's handPriority or because it had the next highest card
+     * @return The String of the output message
+     */
     public String showWinner(HandId winner, Hand hand1, Hand hand2, boolean[] flag) {
         String message;
         if (flag[0]) {
@@ -22,6 +30,12 @@ public class OutputHandler {
         return message;
     }
 
+    /**
+     * Builds a custom winning message
+     * @param handLabel The hand label of the winner
+     * @param hand The winning Hand
+     * @return The String of the winning message
+     */
     public String buildWinningMessage(String handLabel, Hand hand) {
         String highestCard = hand.getHighestCard().toString();
         String message;
