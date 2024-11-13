@@ -1,10 +1,8 @@
 # Dojo Poker
-___
 
 ## Execution de programme 
 - Le jeu se trouve dans le main() de la classe Game situer dans `/src/ps5/gameRunner/Game.java`
 - Tous les tests se trouvent dans le repo `/Test`
----
 ## Etat de la livraison
 On a réussi à implementer et tester toutes les fonctionnalités demandées.
 
