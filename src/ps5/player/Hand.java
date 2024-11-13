@@ -47,7 +47,8 @@ public class Hand {
     }
 
     /**
-     * @return the map of card values and their frequencies in the hand
+     * The map of card values and their frequencies in the hand
+     * @return hashMap
      */
     public Map<CardValue, Integer> getHashMapFromHand() {
         return hashMapFromHand;
@@ -65,7 +66,7 @@ public class Hand {
     }
 
     /**
-     * Returns the highest card in the hand
+     * Returns the highest card depending on the rule applied to the hand
      * @return CardValue
      */
     public CardValue getHighestCard() {
@@ -180,7 +181,7 @@ public class Hand {
 
     /**
      * Checks if the hand contains two different pairs
-     * @return a boolean (true if doublepaire or false if not)
+     * @return a boolean (true if double paire or false if not)
      */
     public boolean isDoublePaire() {
 
@@ -241,7 +242,7 @@ public class Hand {
     }
 
     /**
-     * Runs through all possible hands to determine the best hand ranking
+     * Runs through all possible hands to determine the best hand priority
      */
     public void runAllPossibleHands() {
         if (isRoyalFlush()) return;
