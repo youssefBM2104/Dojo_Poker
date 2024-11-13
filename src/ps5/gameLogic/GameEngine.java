@@ -6,6 +6,9 @@ import ps5.player.enums.HandId;
 import ps5.player.enums.HandPriority;
 
 
+/**
+ * Determines the winner between 2 hands
+ */
 public class GameEngine {
 
 

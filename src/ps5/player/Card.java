@@ -9,7 +9,14 @@ import java.util.Objects;
  * Represents a playing card with a specific color and value.
  */
 public class Card {
+
+    /**
+     * The color of the Card
+     */
     private final CardColor cardColor;
+    /**
+     * The value of the Card
+     */
     private final CardValue cardValue;
 
     /**

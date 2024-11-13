@@ -5,14 +5,26 @@ import ps5.player.enums.HandPriority;
 
 import java.util.*;
 
+/**
+ * Represents a collection of Cards
+ */
 public class Hand {
-    // List of cards in the hand
+    /**
+     * List of cards in the hand
+     */
+
     private List<Card> cardList;
-    // Priority of the hand
+    /**
+     *  Priority of the hand
+     */
     private HandPriority handPriority;
-    // Highest card in the hand
+    /**
+     *  Highest card in the hand
+     */
     private CardValue highestCard;
-    // Mapping of card values to their frequency in the hand
+    /**
+     * Mapping of card values to their frequency in the hand
+     */
     private Map<CardValue, Integer> hashMapFromHand;
 
     /**

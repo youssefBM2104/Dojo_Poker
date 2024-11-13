@@ -3,6 +3,9 @@ package ps5.io;
 import ps5.player.Hand;
 import ps5.player.enums.HandId;
 
+/**
+ * Responsible for all the output messages
+ */
 public class OutputHandler {
     /**
      * Builds a custom winning message depending on who won and how they won

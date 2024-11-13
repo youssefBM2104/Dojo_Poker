@@ -7,6 +7,9 @@ import ps5.player.enums.CardValue;
 
 import java.util.Scanner;
 
+/**
+ * Responsible for all the inputs
+ */
 public class HandScanner {
 
     /**
