@@ -11,6 +11,9 @@ public class Hand {
     private CardValue highestCard;
     private Map<CardValue, Integer> hashMapFromHand;
 
+    /**
+     * Constructor to initialize an empty hand with default values
+     */
     public Hand() {
         this.cardList = new ArrayList<>();
         handPriority = HandPriority.MAX_CARD_IN_HAND;
@@ -28,6 +31,10 @@ public class Hand {
         return hashMapFromHand;
     }
 
+    /**
+     * Adds a card to the hand and updates the frequency map of card values
+     * @param card
+     */
     public void addCardToHand(Card card) {
         this.cardList.add(card);
         updateHashMap(card);
@@ -44,6 +51,10 @@ public class Hand {
     }
 
 
+    /**
+     * Finds and returns the maximum card value in the hand
+     * @return CardValue
+     */
     public CardValue maxCardValueFromList() {
 
         Card maxCard = cardList.getFirst();
@@ -55,11 +66,19 @@ public class Hand {
         return maxCard.getCardValue();
     }
 
+    /**
+     * Checks if the hand contains a pair
+     * @return a boolean (true if paire or false if not)
+     */
     public boolean isPaire() {
         return checkForNTuple(2, HandPriority.PAIRE);
 
     }
 
+    /**
+     * Checks if the hand contains four of a kind
+     * @return a boolean (true if carre or false if not)
+     */
     public boolean isCarre() {
         if (hashMapFromHand.size() != 2) {
             return false;
@@ -67,11 +86,19 @@ public class Hand {
         return checkForNTuple(4, HandPriority.CARRE);
     }
 
+    /**
+     * Checks if the hand contains three of a kind
+     * @return a boolean (true if brelan or false if not)
+     */
     public boolean isBrelan() {
         return checkForNTuple(3, HandPriority.BRELAN);
 
     }
 
+    /**
+     * Checks if all cards in the hand are of the same suit
+     * @return a boolean (true if fullcolor or false if not)
+     */
     public boolean isFullColor() {
         Card firstCard = cardList.getFirst();
         for (Card card : cardList) {
@@ -84,6 +111,10 @@ public class Hand {
         return true;
     }
 
+    /**
+     * Checks if the hand contains a full house (three of a kind and a pair)
+     * @return a boolean (true if full house or false if not)
+     */
     public boolean isFullHouse() {
         if (hashMapFromHand.size() != 2) {
             return false;
@@ -92,6 +123,10 @@ public class Hand {
 
     }
 
+    /**
+     * Checks if the hand contains a royal flush (same suit from 10 to Ace)
+     * @return a boolean (true if royal flush or false if not)
+     */
     public boolean isRoyalFlush() {
         if (!isFullColor()) {
             return false;
@@ -112,8 +147,11 @@ public class Hand {
         return true;
     }
 
-    //Detecter 2 doubles, dans highest card mettre le double le plus haut
-    //
+
+    /**
+     * Checks if the hand contains two different pairs
+     * @return a boolean (true if doublepaire or false if not)
+     */
     public boolean isDoublePaire() {
 
         if (hashMapFromHand.size() != 3) {
@@ -141,11 +179,21 @@ public class Hand {
     }
 
 
+    /**
+     * Updates the map of card values with the frequency of each card in the hand
+     * @param card
+     */
     private void updateHashMap(Card card) {
         CardValue cardValue = card.getCardValue();
         hashMapFromHand.put(cardValue, hashMapFromHand.getOrDefault(cardValue, 0) + 1);
     }
 
+    /**
+     * Checks if the hand contains a specified number of identical cards
+     * @param n
+     * @param handPriority
+     * @return a boolean (true if in map or false if not)
+     */
     private boolean checkForNTuple(int n, HandPriority handPriority) {
 
         if (!hashMapFromHand.containsValue(n)) {
@@ -162,6 +210,9 @@ public class Hand {
         return false;
     }
 
+    /**
+     * Runs through all possible hands to determine the best hand ranking
+     */
     public void runAllPossibleHands() {
         if (isRoyalFlush()) return;
         if (isQuinteFlush()) return;
@@ -177,6 +228,9 @@ public class Hand {
     }
 
 
+    /**
+     * Advances to the next highest card based on the current hand priority
+     */
     public void nextHighestCard() {
         removeCardFromList(highestCard);
         switch (handPriority) {
@@ -197,10 +251,18 @@ public class Hand {
         }
     }
 
+    /**
+     * @param cardValue
+     * Removes a card from the list by its value
+     */
     public void removeCardFromList(CardValue cardValue) {
         cardList.removeIf(card -> card.getCardValue().equals(cardValue));
     }
 
+    /**
+     * @param cardValue
+     * Removes a specified pair from the map of card values
+     */
     public void removePairFromHashMap(CardValue cardValue) {
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue() == 2 && entry.getKey() == cardValue) {
@@ -210,6 +272,9 @@ public class Hand {
         }
     }
 
+    /**
+     * Sets the highest card for the next found pair
+     */
     public void setHighestCardFromNextPair() {
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue() == 2) {
@@ -218,6 +283,9 @@ public class Hand {
         }
     }
 
+    /**
+     * Sorts the list of cards by their value
+     */
     private void triCardListe() {
         int lengthL = cardList.size();
         for (int i = 1; i < lengthL; i++) {
@@ -235,6 +303,10 @@ public class Hand {
     }
 
 
+    /**
+     * Checks if the hand contains a straight (five consecutive cards)
+     * @return a boolean (true if suite or false if not)
+     */
     public boolean isSuite() {
 
 
@@ -255,6 +327,10 @@ public class Hand {
         return true;
     }
 
+    /**
+     * Checks if the hand contains a straight flush (five consecutive cards of the same suit)
+     * @return a boolean (true if quinte or false if not)
+     */
     public boolean isQuinteFlush() {
         if (isSuite() && isFullColor()) {
             handPriority = HandPriority.FLUSH;
@@ -264,6 +340,9 @@ public class Hand {
         return false;
     }
 
+    /**
+     * @return the value of a three-of-a-kind if present
+     */
     public CardValue getTripleValue() {
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue() == 3) {
@@ -273,6 +352,10 @@ public class Hand {
         return null;
     }
 
+
+    /**
+     * @return the value of a pair if present
+     */
     public CardValue getPairValue() {
         for (Map.Entry<CardValue, Integer> entry : hashMapFromHand.entrySet()) {
             if (entry.getValue() == 2) {
