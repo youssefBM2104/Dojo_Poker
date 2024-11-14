@@ -1,0 +1,15 @@
+// paire vs couleur
+RCa RCo 6Tr 3Pi 5Tr
+VTr DTr 6Tr 4Tr 2Tr
+
+// Double_paire(R,10) vs Double_paire(R,10)
+10Tr 10Ca RCo RPi ACa
+10Pi 10Co RTr RCa 9Tr
+
+// suite vs couleur
+5Tr 6Tr 7Tr 8Tr 9Tr
+2Pi 3Pi 4Pi 5Pi 6Pi
+
+// quinte flush royale vs quinte flush
+ATr RTr 10Tr VTr DTr
+5Tr 6Tr 7Tr 8Tr 9Tr
